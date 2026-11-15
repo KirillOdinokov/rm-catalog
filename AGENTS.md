@@ -43,6 +43,8 @@
 E:\Сайты\rex.moscow\
 ├─ AGENTS.md                  этот файл
 ├─ STATUS.md                  история: паритет URL, состояние сайтов
+├─ sync_and_deploy.sh         автосинк на flux: git pull -> цены из Базы -> сборка + деплой (cron)
+├─ .gitignore                 что не попадает в репозиторий (прайс, доступы, data\rekspro, dist)
 ├─ site\                      генератор
 │  ├─ build.py                точка входа: собирает dist, sitemap, поиск, robots, og
 │  ├─ config.py               BASE, контакты, разделы, факты, нормативы
@@ -70,6 +72,7 @@ E:\Сайты\rex.moscow\
 ├─ unpublished\               неопубликованные материалы из дампа БД (export_unpublished.py)
 ├─ tools\                     служебные скрипты (см. ниже)
 ├─ deploy\                    скрипты деплоя, server.env (доступ), архив сборки;
+│                             deploy_linux.sh — выкладка с flux (основной путь),
 │                             new-server\ — незапущенный вариант под 109.95.77.86 (IIS + certs)
 ├─ dist\                      результат сборки (= корень сайта на сервере)
 ├─ dist_nginx\                vhost'ы, web.config для IIS, rex-redirects.txt
@@ -83,6 +86,8 @@ $py = 'C:\Users\Кирилл\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\
 cd E:\Сайты\rex.moscow
 
 & $py site\build.py          # сборка dist (~1 c)
+& $py tools\sync_prices.py     # цены из «Базы» (site_id 6) -> model.json + data\price_sync.json
+& $py tools\check_publish_due.py  # сколько отложенных статей пора публиковать (0 = всё актуально)
 & $py tools\links.py         # проверка внутренних ссылок: должно быть broken: 0
 & $py tools\serve_local.py   # локальный сервер http://127.0.0.1:8090
 & $py tools\parity.py        # сверка с архивными URL (см. STATUS.md)
@@ -124,9 +129,74 @@ $py13 = 'C:\Users\Кирилл\AppData\Local\Programs\Python\Python313\python.ex
 - Фото завода уже WebP, пережимаются в 900 px / q82 и кладутся в общий манифест
   `data\images.json`; приоритет у фото из бэкапа старого сайта.
 
+## Общая система: git, «База», автосинк на flux
+
+С 15.11.2026 сайт живёт в общей системе заказчика: код — в git, цены — в «Базе»
+(PostgreSQL + FastAPI, `https://ai.enix.ru:10443/base/`), сборка и выкладка — на сервере `flux`.
+
+### Репозиторий
+
+- Remote: `git@github.com:KirillOdinokov/rm-catalog.git`, ветка `main`, публичный.
+- Рабочая копия: `E:\Сайты\rex.moscow` (источник правок). На `flux` — `/home/kirill/rex.moscow`.
+- Процесс: правка → `git add` → `git commit` → `git push`; сервер делает `git pull --ff-only`.
+- В `.gitignore` (в git **не** попадают): `deploy/server.env`, `*.xlsx`, `data/prices.json`,
+  `data/price_sync.json`, `data/price_map_auto.json`, `mapping.md`, `STATUS.md`, `SEO-AUDIT.md`,
+  `missing-images-rex.csv`, `unpublished/`, `data/rekspro/`, `dist/`, `shots/`, `*.tar.gz`,
+  `data/model.backup.json`, `data/model.before_articles.json`.
+- **Следствие:** прайс и база знаний завода в git отсутствуют. Для сборки на сервере нужны
+  `data/rekspro/kb.json` и `data/rekspro/match.json` (иначе 134 карточки соберутся с
+  шаблонными текстами кластера вместо описаний завода — молча, без ошибки).
+  Проверка: `ls /home/kirill/rex.moscow/data/rekspro` на `flux`; при переезде копировать
+  эти два файла (или снять исключение в `.gitignore` и закоммитить их, ~760 КБ).
+- `data/model.json` в git есть: это контент (товары, статьи), но **не** цены — цены на сервере
+  перезаписываются синком, перед `git pull` скрипт делает `git checkout -- data/model.json`.
+
+### Цены из «Базы» (site_id = 6)
+
+- Прайс загружается в «Базу» (страница `/base/prices`), разбирается `base/rex_price_parser.py`
+  (те же 4 листа и раскладка колонок, что в `tools/parse_price.py`).
+- Маппинг «карточка → строка прайса» хранится в таблице `site_price_mapping` (167 строк,
+  один в один с `mapping.md`); розничная цена попадает в `product_sites.current_price`.
+- Сайт забирает готовые цены: `GET https://ai.enix.ru:10443/base/api/site/6/prices` →
+  `{"site_id": 6, "prices": {"slug": 12345 | null}}`. Сейчас 167 слагов, у 60 цена `null`
+  (позиции без цены в прайсе → «по запросу»).
+- `tools/sync_prices.py` заменяет `parse_price.py` + `apply_prices.py`: обновляет `price`,
+  `old = 0`, `price_level = retail`, `meta_title` («… - купить по цене N руб с НДС»),
+  пишет отчёт `data/price_sync.json` и бэкап `data/model.backup.json`. Адрес API
+  переопределяется переменной `REX_API_URL`.
+- Ручные `parse_price.py` / `apply_prices.py` остаются для работы без Базы (новый xlsx в корне).
+
+### Автосинк `sync_and_deploy.sh` (на flux, по cron)
+
+`cd /home/kirill/rex.moscow` → `git checkout -- data/model.json` → `git pull --ff-only` →
+`sync_prices.py` → `check_publish_due.py` → если цены изменились **или** наступила дата
+отложенной публикации: `site/build.py` + `sh deploy/deploy_linux.sh`. Лог — `/tmp/rex_sync.log`.
+На сервере `REX_API_URL=http://127.0.0.1:8001/api/site/6/prices` (через nginx Базы).
+
+**Важно:** скрипт пересобирает сайт только по этим двум триггерам. Правки кода и контента
+(тексты, статьи, дизайн) сами не выкатываются — после `git push` нужно на `flux` запустить
+`sh sync_and_deploy.sh` вручную (или `python site/build.py && sh deploy/deploy_linux.sh`).
+Пока этого не сделано, следующее изменение цен выкатит накопленные правки разом.
+
+### Отложенная публикация статей
+
+- В `data/model.json` у статьи может быть `publish_at: "YYYY-MM-DD"` (или `"DD.MM.YYYY"`).
+- `site/pages.py` → `_visible_post()`: пока дата не наступила, статьи нет ни в списке блога,
+  ни в sitemap, ни в поиске; её страница не собирается.
+- `tools/check_publish_due.py` печатает число статей, у которых дата наступила, а файла в
+  `dist` ещё нет; ненулевое число в `sync_and_deploy.sh` запускает сборку и деплой.
+- Достаточно поставить дату в будущем и сделать push — дальше cron опубликует сам.
+
 ## Деплой
 
-Атомарная подмена каталога, без простоя:
+**Основной путь** — с `flux`: `deploy/deploy_linux.sh` (tar → scp на `enixfirstvds` →
+распаковка в `/var/www/sites/.rex-new-<TS>` → `chown www-data` → текущий каталог в
+`rex.moscow.old-<TS>` → `nginx -t` → `systemctl reload nginx`). Нужен ssh-алиас
+`enixfirstvds` в `~/.ssh/config` на `flux`. Резервные каталоги скрипт не чистит — раз в
+несколько месяцев удалять старые `rex.moscow.old-*`, оставляя последний.
+
+**Резервный путь (Windows, plink)** — если `flux` недоступен. Атомарная подмена каталога,
+без простоя:
 
 1. `tar -czf deploy\dist-new.tar.gz -C dist .`
 2. `pscp deploy\dist-new.tar.gz root@168.113.186.217:/tmp/rex-<TS>.tar.gz`
@@ -182,6 +252,12 @@ $py13 = 'C:\Users\Кирилл\AppData\Local\Programs\Python\Python313\python.ex
 | Дистрибьютор | −23,5…−28,5 % |
 
 Процедура обновления:
+
+**Основной путь — через «Базу»** (см. «Общая система»): прайс загружается в `/base/prices`,
+маппинг живёт в `site_price_mapping`, сайт забирает готовые цены
+`& $py tools\sync_prices.py`. Руками прайс разбирать не нужно.
+
+Ручной путь (новая версия xlsx, работа без Базы):
 
 ```powershell
 & $py tools\parse_price.py        # xlsx -> data\prices.json (положите новый xlsx в корень)

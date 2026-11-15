@@ -674,14 +674,14 @@ def _fix_article(html, known):
         return 'href="/shop"'
 
     html = re.sub(r'href="([^"]+)"', fix_link, html)
-    # заголовки без id получают id по номеру
+    # заголовки без id получают id по номеру; номер стабильный (hash() менялся от запуска к запуску)
     n = [0]
 
     def add_id(m):
         n[0] += 1
-        return '<%s id="s%d">' % (m.group(1), n[0])
+        return '<h2 id="s%d"%s>' % (n[0], m.group(1) or "")
 
-    html = re.sub(r'<h2(?![^>]*id=)', lambda m: '<h2 id="s%d">' % (hash(m.string or "") % 1000), html)
+    html = re.sub(r'<h2((?![^>]*\bid\s*=)[^>]*)>', add_id, html)
     return html
 
 
