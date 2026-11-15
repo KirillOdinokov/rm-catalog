@@ -3,6 +3,7 @@
 import json
 import os
 import re
+from datetime import date
 
 import art
 import config as C
@@ -19,13 +20,27 @@ except Exception:
     POST_DATES = {}
 
 
+def _visible_post(p):
+    """Статья видна, если нет publish_at (нет расписания) или дата уже наступила.
+
+    publish_at — 'YYYY-MM-DD' (или 'DD.MM.YYYY'). Пустое значение = публиковать сразу.
+    """
+    pa = (p.get("publish_at") or "").strip()
+    if not pa:
+        return True
+    m = re.match(r"^(\d{2})\.(\d{2})\.(\d{4})$", pa)
+    if m:
+        pa = "%s-%s-%s" % (m.group(3), m.group(2), m.group(1))
+    return pa <= date.today().isoformat()
+
+
 class Model(object):
     def __init__(self):
         m = json.load(open(os.path.join(C.DATA, "model.json"), encoding="utf-8"))
         self.products = m["products"]
         self.cats = m["cats"]
         self.pages = {p["slug"]: p for p in m["pages"]}
-        self.posts = m["posts"]
+        self.posts = [p for p in m["posts"] if _visible_post(p)]
         self.calcs = m["calcs"]
         self.by_slug = {p["slug"]: p for p in self.products}
         self.cat_by = {c["slug"]: c for c in self.cats}

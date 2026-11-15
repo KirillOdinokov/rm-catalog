@@ -15,9 +15,12 @@ LOG=/tmp/rex_sync.log
 $PY tools/sync_prices.py > "$LOG" 2>&1
 changed=$($PY -c "import json; print(len(json.load(open('data/price_sync.json', encoding='utf-8'))['changed']))" 2>/dev/null || echo 0)
 
-# 3) сборка + деплой при изменении
-if [ "$changed" != "0" ]; then
-  echo "changed=$changed -> build + deploy" >> "$LOG"
+# 2б) отложенная публикация: статьи, чей publish_at наступил, но которых ещё нет в dist
+publish_due=$($PY tools/check_publish_due.py 2>/dev/null || echo 0)
+
+# 3) сборка + деплой при изменении цен ИЛИ наступившей публикации
+if [ "$changed" != "0" ] || [ "$publish_due" != "0" ]; then
+  echo "changed=$changed publish_due=$publish_due -> build + deploy" >> "$LOG"
   $PY site/build.py >> "$LOG" 2>&1
   sh deploy/deploy_linux.sh >> "$LOG" 2>&1
 fi
