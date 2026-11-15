@@ -1,0 +1,927 @@
+{
+ "products": {
+  "reks-epo-uni-shot-long": {
+   "file": "p/reks-epo-uni-shot-long.webp",
+   "bytes": 15680
+  },
+  "reks-epo-lik": {
+   "file": "p/reks-epo-lik.webp",
+   "bytes": 17456
+  },
+  "reks-fiks-epo-e": {
+   "file": "p/reks-fiks-epo-e.webp",
+   "bytes": 17036
+  },
+  "reks-epo-rezin": {
+   "file": "p/reks-epo-rezin.webp",
+   "bytes": 20474
+  },
+  "reks-fiks-epo-t": {
+   "file": "p/reks-fiks-epo-t.webp",
+   "bytes": 19230
+  },
+  "gidroshponka-thg-2p": {
+   "file": "p/gidroshponka-thg-2p.webp",
+   "bytes": 6976
+  },
+  "gidroshponka-reks-p-6": {
+   "file": "p/gidroshponka-reks-p-6.webp",
+   "bytes": 7594
+  },
+  "gidroshponka-reks-p-5": {
+   "file": "p/gidroshponka-reks-p-5.webp",
+   "bytes": 16770
+  },
+  "gidroshponka-reks-thd-6p": {
+   "file": "p/gidroshponka-reks-thd-6p.webp",
+   "bytes": 7566
+  },
+  "gidroshponka-reks-thr-10p": {
+   "file": "p/gidroshponka-reks-thr-10p.webp",
+   "bytes": 13792
+  },
+  "gidroshponka-reks-p-4": {
+   "file": "p/gidroshponka-reks-p-4.webp",
+   "bytes": 15474
+  },
+  "gidroshponka-reks-p-2-s-prizhimom": {
+   "file": "p/gidroshponka-reks-p-2-s-prizhimom.webp",
+   "bytes": 13582
+  },
+  "gidroshponka-reks-th-shd": {
+   "file": "p/gidroshponka-reks-th-shd.webp",
+   "bytes": 14656
+  },
+  "gidroizolyacionnaya-membrana-mvr": {
+   "file": "p/gidroizolyacionnaya-membrana-mvr.webp",
+   "bytes": 88594
+  },
+  "reks-gidrolenta": {
+   "file": "p/reks-gidrolenta.webp",
+   "bytes": 12676
+  },
+  "hacut-kat": {
+   "file": "p/hacut-kat.webp",
+   "bytes": 17612
+  },
+  "hasoil-rokstab": {
+   "file": "p/hasoil-rokstab.webp",
+   "bytes": 18590
+  },
+  "hasoil-sojl": {
+   "file": "p/hasoil-sojl.webp",
+   "bytes": 16086
+  },
+  "hasoil-gelakril": {
+   "file": "p/hasoil-gelakril.webp",
+   "bytes": 24198
+  },
+  "hacut-fleks-snv": {
+   "file": "p/hacut-fleks-snv.webp",
+   "bytes": 17496
+  },
+  "hacut-ochistitel": {
+   "file": "p/hacut-ochistitel.webp",
+   "bytes": 11448
+  },
+  "hacut-ochistitel-2": {
+   "file": "p/hacut-ochistitel-2.webp",
+   "bytes": 11762
+  },
+  "hasoil-gelakril-ar": {
+   "file": "p/hasoil-gelakril-ar.webp",
+   "bytes": 17150
+  },
+  "hasoil-rokstab-fast": {
+   "file": "p/hasoil-rokstab-fast.webp",
+   "bytes": 16214
+  },
+  "hasoil-gelakril-ar-3-0": {
+   "file": "p/hasoil-gelakril-ar-3-0.webp",
+   "bytes": 28956
+  },
+  "reks-plag-plag-30": {
+   "file": "p/reks-plag-plag-30.webp",
+   "bytes": 15138
+  },
+  "reks-sil": {
+   "file": "p/reks-sil.webp",
+   "bytes": 25466
+  },
+  "reks-elast-110": {
+   "file": "p/reks-elast-110.webp",
+   "bytes": 28564
+  },
+  "reks-elast-122": {
+   "file": "p/reks-elast-122.webp",
+   "bytes": 28766
+  },
+  "reks-elast-100": {
+   "file": "p/reks-elast-100.webp",
+   "bytes": 33814
+  },
+  "reks-anti-kapillyar": {
+   "file": "p/reks-anti-kapillyar.webp",
+   "bytes": 21900
+  },
+  "reks-super": {
+   "file": "p/reks-super.webp",
+   "bytes": 26304
+  },
+  "reks-barer": {
+   "file": "p/reks-barer.webp",
+   "bytes": 27128
+  },
+  "reks-dekor-bk": {
+   "file": "p/reks-dekor-bk.webp",
+   "bytes": 27112
+  },
+  "reks-protekt": {
+   "file": "p/reks-protekt.webp",
+   "bytes": 24110
+  },
+  "reks-dekor": {
+   "file": "p/reks-dekor.webp",
+   "bytes": 14272
+  },
+  "reks-gidrofob": {
+   "file": "p/reks-gidrofob.webp",
+   "bytes": 19282
+  },
+  "reks-epo-dekos": {
+   "file": "p/reks-epo-dekos.webp",
+   "bytes": 19262
+  },
+  "severus-tikso": {
+   "file": "p/severus-tikso.webp",
+   "bytes": 18772
+  },
+  "severus-prajmer": {
+   "file": "p/severus-prajmer.webp",
+   "bytes": 19090
+  },
+  "severus-mf": {
+   "file": "p/severus-mf.webp",
+   "bytes": 17604
+  },
+  "severus-ud-200": {
+   "file": "p/severus-ud-200.webp",
+   "bytes": 22018
+  },
+  "reks-specrastvor": {
+   "file": "p/reks-specrastvor.webp",
+   "bytes": 20192
+  },
+  "reks-strukto-lit": {
+   "file": "p/reks-strukto-lit.webp",
+   "bytes": 20708
+  },
+  "reks-epo-inzh": {
+   "file": "p/reks-epo-inzh.webp",
+   "bytes": 22216
+  },
+  "reks-klej-penoblok": {
+   "file": "p/reks-klej-penoblok.webp",
+   "bytes": 27890
+  },
+  "reks-klej-teplokontakt": {
+   "file": "p/reks-klej-teplokontakt.webp",
+   "bytes": 27544
+  },
+  "reks-klej-b55": {
+   "file": "p/reks-klej-b55.webp",
+   "bytes": 26364
+  },
+  "reks-klejplit": {
+   "file": "p/reks-klejplit.webp",
+   "bytes": 26870
+  },
+  "reks-klej-2000": {
+   "file": "p/reks-klej-2000.webp",
+   "bytes": 26526
+  },
+  "reks-klej-pljus": {
+   "file": "p/reks-klej-pljus.webp",
+   "bytes": 27058
+  },
+  "reks-klej-elast": {
+   "file": "p/reks-klej-elast.webp",
+   "bytes": 23350
+  },
+  "reks-fiks-akrep": {
+   "file": "p/reks-fiks-akrep.webp",
+   "bytes": 24514
+  },
+  "reks-fiks-epo-tiks": {
+   "file": "p/reks-fiks-epo-tiks.webp",
+   "bytes": 25526
+  },
+  "reks-fiks-epo-t-vn": {
+   "file": "p/reks-fiks-epo-t-vn.webp",
+   "bytes": 25302
+  },
+  "reks-fleks-epo-lik": {
+   "file": "p/reks-fleks-epo-lik.webp",
+   "bytes": 17970
+  },
+  "reks-epo-prajmer": {
+   "file": "p/reks-epo-prajmer.webp",
+   "bytes": 17108
+  },
+  "reks-epo-top": {
+   "file": "p/reks-epo-top.webp",
+   "bytes": 18086
+  },
+  "reks-prajmer-antikor": {
+   "file": "p/reks-prajmer-antikor.webp",
+   "bytes": 14380
+  },
+  "reks-prajmer": {
+   "file": "p/reks-prajmer.webp",
+   "bytes": 12244
+  },
+  "reks-struktofljuid": {
+   "file": "p/reks-struktofljuid.webp",
+   "bytes": 21308
+  },
+  "reks-graut-m": {
+   "file": "p/reks-graut-m.webp",
+   "bytes": 24958
+  },
+  "reks-litoj": {
+   "file": "p/reks-litoj.webp",
+   "bytes": 24384
+  },
+  "reks-graut-gp": {
+   "file": "p/reks-graut-gp.webp",
+   "bytes": 24418
+  },
+  "reks-graut-3-0": {
+   "file": "p/reks-graut-3-0.webp",
+   "bytes": 24892
+  },
+  "reks-fab-10p": {
+   "file": "p/reks-fab-10p.webp",
+   "bytes": 25052
+  },
+  "reks-fljuid": {
+   "file": "p/reks-fljuid.webp",
+   "bytes": 24372
+  },
+  "reks-fajber-l": {
+   "file": "p/reks-fajber-l.webp",
+   "bytes": 33864
+  },
+  "reks-grip-ultra": {
+   "file": "p/reks-grip-ultra.webp",
+   "bytes": 12110
+  },
+  "reks-grip": {
+   "file": "p/reks-grip.webp",
+   "bytes": 12110
+  },
+  "reks-ar": {
+   "file": "p/reks-ar.webp",
+   "bytes": 25996
+  },
+  "reks-r4": {
+   "file": "p/reks-r4.webp",
+   "bytes": 19860
+  },
+  "reks-strukto-100": {
+   "file": "p/reks-strukto-100.webp",
+   "bytes": 27746
+  },
+  "reks-r3": {
+   "file": "p/reks-r3.webp",
+   "bytes": 24932
+  },
+  "reks-strukto-r3": {
+   "file": "p/reks-strukto-r3.webp",
+   "bytes": 27880
+  },
+  "reks-bs": {
+   "file": "p/reks-bs.webp",
+   "bytes": 26116
+  },
+  "reks-strukto-70": {
+   "file": "p/reks-strukto-70.webp",
+   "bytes": 27106
+  },
+  "reks-ol": {
+   "file": "p/reks-ol.webp",
+   "bytes": 20954
+  },
+  "reks-tikso": {
+   "file": "p/reks-tikso.webp",
+   "bytes": 26868
+  },
+  "reks-strukto-300": {
+   "file": "p/reks-strukto-300.webp",
+   "bytes": 27786
+  },
+  "reks-strukto-r4": {
+   "file": "p/reks-strukto-r4.webp",
+   "bytes": 28194
+  },
+  "reks-strukto-bs-3": {
+   "file": "p/reks-strukto-bs-3.webp",
+   "bytes": 27596
+  },
+  "reks-ar-fm": {
+   "file": "p/reks-ar-fm.webp",
+   "bytes": 28654
+  },
+  "reks-akrisil-vn": {
+   "file": "p/reks-akrisil-vn.webp",
+   "bytes": 26188
+  },
+  "reks-akrilik-vn": {
+   "file": "p/reks-akrilik-vn.webp",
+   "bytes": 22988
+  },
+  "reks-akrilik-elast-vn": {
+   "file": "p/reks-akrilik-elast-vn.webp",
+   "bytes": 31714
+  },
+  "reks-53s": {
+   "file": "p/reks-53s.webp",
+   "bytes": 26062
+  },
+  "reks-np-5000": {
+   "file": "p/reks-np-5000.webp",
+   "bytes": 26606
+  },
+  "reks-np-4000": {
+   "file": "p/reks-np-4000.webp",
+   "bytes": 26512
+  },
+  "reks-np-3000": {
+   "file": "p/reks-np-3000.webp",
+   "bytes": 26592
+  },
+  "tekasil-firestop-silikonovyj-germetik-dlya-protivopozharnyh-shvov": {
+   "file": "p/tekasil-firestop-silikonovyj-germetik-dlya-protivopozharnyh-shvov.webp",
+   "bytes": 16944
+  },
+  "reks-litoj-110": {
+   "file": "p/reks-litoj-110.webp",
+   "bytes": 37590
+  },
+  "reks-strukto-60": {
+   "file": "p/reks-strukto-60.webp",
+   "bytes": 31052
+  },
+  "reks-strukto-tiks": {
+   "file": "p/reks-strukto-tiks.webp",
+   "bytes": 21458
+  },
+  "reks-30": {
+   "file": "p/reks-30.webp",
+   "bytes": 33782
+  },
+  "reks-nabryzg": {
+   "file": "p/reks-nabryzg.webp",
+   "bytes": 30256
+  },
+  "reks-torkret": {
+   "file": "p/reks-torkret.webp",
+   "bytes": 32726
+  },
+  "reks-fiks-epo-t-vn-krasnyj": {
+   "file": "p/reks-fiks-epo-t-vn-krasnyj.webp",
+   "bytes": 37168
+  },
+  "reks-fiks-epo-t-vn-100-seryj-krasnyj": {
+   "file": "p/reks-fiks-epo-t-vn-100-seryj-krasnyj.webp",
+   "bytes": 35218
+  },
+  "reks-fiks-epo-t-vn-esh-seryj": {
+   "file": "p/reks-fiks-epo-t-vn-esh-seryj.webp",
+   "bytes": 35580
+  },
+  "reks-epolit": {
+   "file": "p/reks-epolit.webp",
+   "bytes": 31384
+  },
+  "reks-akva-densit": {
+   "file": "p/reks-akva-densit.webp",
+   "bytes": 30314
+  },
+  "reks-akrisil-l": {
+   "file": "p/reks-akrisil-l.webp",
+   "bytes": 34864
+  },
+  "reks-plag-30": {
+   "file": "p/reks-plag-30.webp",
+   "bytes": 46706
+  },
+  "reks-sil-belyj": {
+   "file": "p/reks-sil-belyj.webp",
+   "bytes": 31820
+  },
+  "reks-elast-122-belyj": {
+   "file": "p/reks-elast-122-belyj.webp",
+   "bytes": 16978
+  },
+  "reks-elast-100-belyj": {
+   "file": "p/reks-elast-100-belyj.webp",
+   "bytes": 17182
+  },
+  "reks-super-belyj": {
+   "file": "p/reks-super-belyj.webp",
+   "bytes": 33010
+  },
+  "reks-dekor-belyj": {
+   "file": "p/reks-dekor-belyj.webp",
+   "bytes": 20784
+  },
+  "reks-dekor-chernyj": {
+   "file": "p/reks-dekor-chernyj.webp",
+   "bytes": 20784
+  },
+  "reks-dekor-bk-belyj": {
+   "file": "p/reks-dekor-bk-belyj.webp",
+   "bytes": 34940
+  },
+  "reks-protekt-belyj": {
+   "file": "p/reks-protekt-belyj.webp",
+   "bytes": 36324
+  },
+  "reks-gidrofob-a": {
+   "file": "p/reks-gidrofob-a.webp",
+   "bytes": 17370
+  },
+  "reks-msc-upm-protivomoroznyj-modifikator": {
+   "file": "p/reks-msc-upm-protivomoroznyj-modifikator.webp",
+   "bytes": 15978
+  },
+  "reks-akril": {
+   "file": "p/reks-akril.webp",
+   "bytes": 15926
+  },
+  "reks-fiks-epo-t-krasnyj-bystryj-20-min": {
+   "file": "p/reks-fiks-epo-t-krasnyj-bystryj-20-min.webp",
+   "bytes": 33322
+  },
+  "reks-epo-uni-shot": {
+   "file": "p/reks-epo-uni-shot.webp",
+   "bytes": 33390
+  },
+  "reks-klej-elast-seryj": {
+   "file": "p/reks-klej-elast-seryj.webp",
+   "bytes": 35370
+  },
+  "reks-bento-svello-25h20-mm": {
+   "file": "p/reks-bento-svello-25h20-mm.webp",
+   "bytes": 20442
+  },
+  "reks-bento-svello-drugie-sechenija": {
+   "file": "p/reks-bento-svello-drugie-sechenija.webp",
+   "bytes": 20442
+  },
+  "reks-svello-20h4-mm": {
+   "file": "p/reks-svello-20h4-mm.webp",
+   "bytes": 18250
+  },
+  "reks-svello-probka-o-19-mm": {
+   "file": "p/reks-svello-probka-o-19-mm.webp",
+   "bytes": 6000
+  },
+  "reks-svello-probka-o-21-o-23": {
+   "file": "p/reks-svello-probka-o-21-o-23.webp",
+   "bytes": 6000
+  },
+  "reks-svello-probka-o25-o-27": {
+   "file": "p/reks-svello-probka-o25-o-27.webp",
+   "bytes": 6000
+  },
+  "reks-shhetka-10": {
+   "file": "p/reks-shhetka-10.webp",
+   "bytes": 21458
+  },
+  "reks-kist-6": {
+   "file": "p/reks-kist-6.webp",
+   "bytes": 21458
+  },
+  "pistolet-dlja-himicheskogo-ankera-380-ml": {
+   "file": "p/pistolet-dlja-himicheskogo-ankera-380-ml.webp",
+   "bytes": 14026
+  },
+  "pistolet-dlja-himicheskogo-ankera-400-ml": {
+   "file": "p/pistolet-dlja-himicheskogo-ankera-400-ml.webp",
+   "bytes": 9002
+  },
+  "paker-inekcionnyj-aljuminievyj-10x100-mm": {
+   "file": "p/paker-inekcionnyj-aljuminievyj-10x100-mm.webp",
+   "bytes": 11412
+  },
+  "paker-inekcionnyj-stalnoj-10h100-mm-s-cangovoj-golovkoj": {
+   "file": "p/paker-inekcionnyj-stalnoj-10h100-mm-s-cangovoj-golovkoj.webp",
+   "bytes": 11308
+  },
+  "paker-inekcionnyj-stalnoj-10h115-mm-s-ploskoj-golovkoj": {
+   "file": "p/paker-inekcionnyj-stalnoj-10h115-mm-s-ploskoj-golovkoj.webp",
+   "bytes": 1246
+  },
+  "paker-inekcionnyj-stalnoj-13h100-mm-s-cangovoj-golovkoj": {
+   "file": "p/paker-inekcionnyj-stalnoj-13h100-mm-s-cangovoj-golovkoj.webp",
+   "bytes": 9750
+  },
+  "paker-inekcionnyj-stalnoj-13h115-mm-s-ploskoj-golovkoj": {
+   "file": "p/paker-inekcionnyj-stalnoj-13h115-mm-s-ploskoj-golovkoj.webp",
+   "bytes": 1660
+  },
+  "paker-inekcionnyj-stalnoj-16x130-mm-s-ploskoj-golovkoj": {
+   "file": "p/paker-inekcionnyj-stalnoj-16x130-mm-s-ploskoj-golovkoj.webp",
+   "bytes": 1620
+  },
+  "paker-inekcionnyj-plastikovyj-18x115-mm": {
+   "file": "p/paker-inekcionnyj-plastikovyj-18x115-mm.webp",
+   "bytes": 1684
+  },
+  "inekcionnyj-porshnevoj-nasos-gs-1k": {
+   "file": "p/inekcionnyj-porshnevoj-nasos-gs-1k.webp",
+   "bytes": 30728
+  },
+  "nasos-porshnevoj-inekcionnyj-dvuhkomponentnyj-gs-2k": {
+   "file": "p/nasos-porshnevoj-inekcionnyj-dvuhkomponentnyj-gs-2k.webp",
+   "bytes": 30728
+  },
+  "nasos-shnekovyj-apnv25n": {
+   "file": "p/nasos-shnekovyj-apnv25n.webp",
+   "bytes": 20846
+  },
+  "inekcionnaja-igla-shilka-1-vysokogo-davlenija": {
+   "file": "p/inekcionnaja-igla-shilka-1-vysokogo-davlenija.webp",
+   "bytes": 1278
+  },
+  "inekcionnaja-igla-shilka-2b-nizkogo-davlenija": {
+   "file": "p/inekcionnaja-igla-shilka-2b-nizkogo-davlenija.webp",
+   "bytes": 2312
+  },
+  "reks-gidrolenta-200": {
+   "file": "p/reks-gidrolenta-200.webp",
+   "bytes": 14070
+  },
+  "reks-gidrolenta-120-70": {
+   "file": "p/reks-gidrolenta-120-70.webp",
+   "bytes": 14070
+  },
+  "reks-gidrolenta-200h1": {
+   "file": "p/reks-gidrolenta-200h1.webp",
+   "bytes": 14070
+  },
+  "reks-gidrolenta-300h1": {
+   "file": "p/reks-gidrolenta-300h1.webp",
+   "bytes": 14070
+  },
+  "reks-gidrolenta-500h1": {
+   "file": "p/reks-gidrolenta-500h1.webp",
+   "bytes": 14070
+  },
+  "reks-gidrolenta-200h2": {
+   "file": "p/reks-gidrolenta-200h2.webp",
+   "bytes": 14070
+  },
+  "reks-gidrolenta-300h2": {
+   "file": "p/reks-gidrolenta-300h2.webp",
+   "bytes": 14070
+  },
+  "reks-gidrolenta-500h2": {
+   "file": "p/reks-gidrolenta-500h2.webp",
+   "bytes": 14070
+  },
+  "reks-gidrolenta-325-245h1-5": {
+   "file": "p/reks-gidrolenta-325-245h1-5.webp",
+   "bytes": 14070
+  },
+  "reks-epo-uni-long": {
+   "file": "p/reks-epo-uni-long.webp",
+   "bytes": 33390
+  },
+  "reks-akvabond-protekt-arktik": {
+   "file": "p/reks-akvabond-protekt-arktik.webp",
+   "bytes": 22738
+  },
+  "reks-akvabond-protekt-tropik": {
+   "file": "p/reks-akvabond-protekt-tropik.webp",
+   "bytes": 22738
+  },
+  "reks-msc-pz": {
+   "file": "p/reks-msc-pz.webp",
+   "bytes": 15888
+  },
+  "reks-msc-pu": {
+   "file": "p/reks-msc-pu.webp",
+   "bytes": 29496
+  },
+  "reks-msc-antiglina": {
+   "file": "p/reks-msc-antiglina.webp",
+   "bytes": 16984
+  },
+  "reks-msc-penakon": {
+   "file": "p/reks-msc-penakon.webp",
+   "bytes": 16534
+  }
+ },
+ "articles": {
+  "adgezionnye-sostavy-most-scepleniya-betona": {
+   "file": "a/adgezionnye-sostavy-most-scepleniya-betona.webp",
+   "bytes": 52962
+  },
+  "akrilatnye-geli-dlya-inektirovaniya": {
+   "file": "a/akrilatnye-geli-dlya-inektirovaniya.webp",
+   "bytes": 44540
+  },
+  "antikorrozionnaya-zashhita-armatury-prajmery": {
+   "file": "a/antikorrozionnaya-zashhita-armatury-prajmery.webp",
+   "bytes": 29396
+  },
+  "antistaticheskie-polimernye-poly": {
+   "file": "a/antistaticheskie-polimernye-poly.webp",
+   "bytes": 32622
+  },
+  "bystrotverdeyushhie-remontnye-smesi-tehnologiya": {
+   "file": "a/bystrotverdeyushhie-remontnye-smesi-tehnologiya.webp",
+   "bytes": 44136
+  },
+  "defekty-betonnyh-konstrukcij-klassifikaciya": {
+   "file": "a/defekty-betonnyh-konstrukcij-klassifikaciya.webp",
+   "bytes": 50172
+  },
+  "diagnostika-obsledovanie-betonnyh-konstrukcij": {
+   "file": "a/diagnostika-obsledovanie-betonnyh-konstrukcij.webp",
+   "bytes": 28352
+  },
+  "epoksidnye-inekcionnye-sostavy-strukturnoe-vosstanovlenie": {
+   "file": "a/epoksidnye-inekcionnye-sostavy-strukturnoe-vosstanovlenie.webp",
+   "bytes": 64830
+  },
+  "epoksidnye-nalivnye-poly-tehnologiya-ustrojstva": {
+   "file": "a/epoksidnye-nalivnye-poly-tehnologiya-ustrojstva.webp",
+   "bytes": 52382
+  },
+  "epoksidnye-sostavy-v-stroitelstve": {
+   "file": "a/epoksidnye-sostavy-v-stroitelstve.webp",
+   "bytes": 15488
+  },
+  "geomembrany-v-stroitelstve-vidy-primenenie": {
+   "file": "a/geomembrany-v-stroitelstve-vidy-primenenie.webp",
+   "bytes": 72740
+  },
+  "germetizaciya-deformacionnyh-shvov-beton": {
+   "file": "a/germetizaciya-deformacionnyh-shvov-beton.webp",
+   "bytes": 31398
+  },
+  "gidroizolyaciya-bassejnov-kompleksnoe-reshenie": {
+   "file": "a/gidroizolyaciya-bassejnov-kompleksnoe-reshenie.webp",
+   "bytes": 42808
+  },
+  "gidroizolyaciya-betona-polnoe-rukovodstvo": {
+   "file": "a/gidroizolyaciya-betona-polnoe-rukovodstvo.webp",
+   "bytes": 48336
+  },
+  "gidroizolyaciya-krovli-ekspluatiruemyh-terras": {
+   "file": "a/gidroizolyaciya-krovli-ekspluatiruemyh-terras.webp",
+   "bytes": 18354
+  },
+  "gidroizolyaciya-ochistnyh-sooruzhenij": {
+   "file": "a/gidroizolyaciya-ochistnyh-sooruzhenij.webp",
+   "bytes": 61272
+  },
+  "gidroizolyaciya-podvalov-iznutri": {
+   "file": "a/gidroizolyaciya-podvalov-iznutri.webp",
+   "bytes": 34200
+  },
+  "gidroizolyaciya-rezervuarov-chistoj-vody": {
+   "file": "a/gidroizolyaciya-rezervuarov-chistoj-vody.webp",
+   "bytes": 30930
+  },
+  "gidroizolyaciya-tonnelej-podzemnyh-sooruzhenij": {
+   "file": "a/gidroizolyaciya-tonnelej-podzemnyh-sooruzhenij.webp",
+   "bytes": 43932
+  },
+  "gidroshponki-klassifikaciya-montazh-raschet": {
+   "file": "a/gidroshponki-klassifikaciya-montazh-raschet.webp",
+   "bytes": 30936
+  },
+  "gidroshponki-rabochih-shvov-betonirovaniya": {
+   "file": "a/gidroshponki-rabochih-shvov-betonirovaniya.webp",
+   "bytes": 43568
+  },
+  "gost-32016-2012-trebovaniya-remont-betona": {
+   "file": "a/gost-32016-2012-trebovaniya-remont-betona.webp",
+   "bytes": 25626
+  },
+  "himicheskie-ankera-raschet-montazh-kontrol": {
+   "file": "a/himicheskie-ankera-raschet-montazh-kontrol.webp",
+   "bytes": 32488
+  },
+  "importozameshhenie-stroitelnoj-himii": {
+   "file": "a/importozameshhenie-stroitelnoj-himii.webp",
+   "bytes": 31350
+  },
+  "inekcionnaya-gidroizolyaciya-tehnologii-vybor": {
+   "file": "a/inekcionnaya-gidroizolyaciya-tehnologii-vybor.webp",
+   "bytes": 60398
+  },
+  "inekcionnaya-gidroizolyaciya-tonnelej-metro": {
+   "file": "a/inekcionnaya-gidroizolyaciya-tonnelej-metro.webp",
+   "bytes": 39194
+  },
+  "inekcionnoe-usilenie-gruntov-osnovaniya": {
+   "file": "a/inekcionnoe-usilenie-gruntov-osnovaniya.webp",
+   "bytes": 58462
+  },
+  "inektirovanie-kirpichnoj-kladki": {
+   "file": "a/inektirovanie-kirpichnoj-kladki.webp",
+   "bytes": 56174
+  },
+  "inektirovanie-treshhin-beton-epoksidnye-poliuretanovye": {
+   "file": "a/inektirovanie-treshhin-beton-epoksidnye-poliuretanovye.webp",
+   "bytes": 38848
+  },
+  "kak-vybrat-podryadchika-gidroizolyacionnyh-rabot": {
+   "file": "a/kak-vybrat-podryadchika-gidroizolyacionnyh-rabot.webp",
+   "bytes": 38830
+  },
+  "kleevye-sostavy-dlya-plitki-klassifikaciya-vybor": {
+   "file": "a/kleevye-sostavy-dlya-plitki-klassifikaciya-vybor.webp",
+   "bytes": 24122
+  },
+  "klej-dlya-penoblokov-gazobetona-vybor-tehnologiya": {
+   "file": "a/klej-dlya-penoblokov-gazobetona-vybor-tehnologiya.webp",
+   "bytes": 38164
+  },
+  "kontrol-kachestva-inekcionnyh-rabot": {
+   "file": "a/kontrol-kachestva-inekcionnyh-rabot.webp",
+   "bytes": 44310
+  },
+  "likvidaciya-aktivnyh-protechek-podval": {
+   "file": "a/likvidaciya-aktivnyh-protechek-podval.webp",
+   "bytes": 63886
+  },
+  "mineralnye-smesi-remont-betona-sostav-svoystva": {
+   "file": "a/mineralnye-smesi-remont-betona-sostav-svoystva.webp",
+   "bytes": 58270
+  },
+  "montazhnye-kleevye-sostavy-tonkoshovnaya-kladka": {
+   "file": "a/montazhnye-kleevye-sostavy-tonkoshovnaya-kladka.webp",
+   "bytes": 14958
+  },
+  "nabuhayushhie-uplotnitelnye-profili": {
+   "file": "a/nabuhayushhie-uplotnitelnye-profili.webp",
+   "bytes": 25462
+  },
+  "naruzhnye-gidroshponki-deformacionnyh-shvov": {
+   "file": "a/naruzhnye-gidroshponki-deformacionnyh-shvov.webp",
+   "bytes": 62512
+  },
+  "obmazochnaya-gidroizolyaciya-fundamenta-tehnologiya": {
+   "file": "a/obmazochnaya-gidroizolyaciya-fundamenta-tehnologiya.webp",
+   "bytes": 60806
+  },
+  "oborudovanie-dlya-inekcionnyh-rabot": {
+   "file": "a/oborudovanie-dlya-inekcionnyh-rabot.webp",
+   "bytes": 37714
+  },
+  "ognezashhita-betonnyh-metallicheskih-konstrukcij": {
+   "file": "a/ognezashhita-betonnyh-metallicheskih-konstrukcij.webp",
+   "bytes": 36190
+  },
+  "otsechnaya-gidroizolyaciya-sten-primenenie": {
+   "file": "a/otsechnaya-gidroizolyaciya-sten-primenenie.webp",
+   "bytes": 34554
+  },
+  "p-obraznye-gidroshponki-konstrukciya-montazh": {
+   "file": "a/p-obraznye-gidroshponki-konstrukciya-montazh.webp",
+   "bytes": 37044
+  },
+  "podlivochnye-sostavy-tehnologiya-kontrol": {
+   "file": "a/podlivochnye-sostavy-tehnologiya-kontrol.webp",
+   "bytes": 33338
+  },
+  "pokrytiya-promyshlennyh-polov-epoksidnye-poliuretanovye": {
+   "file": "a/pokrytiya-promyshlennyh-polov-epoksidnye-poliuretanovye.webp",
+   "bytes": 27056
+  },
+  "polimernye-poly-avtoservisov-garazhej": {
+   "file": "a/polimernye-poly-avtoservisov-garazhej.webp",
+   "bytes": 22390
+  },
+  "polimernye-poly-farmacevticheskih-predpriyatij": {
+   "file": "a/polimernye-poly-farmacevticheskih-predpriyatij.webp",
+   "bytes": 22474
+  },
+  "polimernye-poly-klassifikaciya-tehnologiya-vybor": {
+   "file": "a/polimernye-poly-klassifikaciya-tehnologiya-vybor.webp",
+   "bytes": 31272
+  },
+  "polimernye-poly-pishhevyh-proizvodstv": {
+   "file": "a/polimernye-poly-pishhevyh-proizvodstv.webp",
+   "bytes": 36008
+  },
+  "polimernye-poly-skladskih-kompleksov": {
+   "file": "a/polimernye-poly-skladskih-kompleksov.webp",
+   "bytes": 75210
+  },
+  "polimernye-remontnye-sostavy-kogda-cementnyh-nedostatochno": {
+   "file": "a/polimernye-remontnye-sostavy-kogda-cementnyh-nedostatochno.webp",
+   "bytes": 46000
+  },
+  "polimernye-zashhitnye-sostavy-epoksidnye-akrilovye": {
+   "file": "a/polimernye-zashhitnye-sostavy-epoksidnye-akrilovye.webp",
+   "bytes": 48556
+  },
+  "poliuretanovye-inekcionnye-sostavy": {
+   "file": "a/poliuretanovye-inekcionnye-sostavy.webp",
+   "bytes": 37466
+  },
+  "poliuretanovye-nalivnye-poly-osobennosti": {
+   "file": "a/poliuretanovye-nalivnye-poly-osobennosti.webp",
+   "bytes": 18098
+  },
+  "poliuretanovye-pokrytiya-zashhita-betona": {
+   "file": "a/poliuretanovye-pokrytiya-zashhita-betona.webp",
+   "bytes": 32966
+  },
+  "prizhimnye-gidroshponki-kreplenie-opalubke": {
+   "file": "a/prizhimnye-gidroshponki-kreplenie-opalubke.webp",
+   "bytes": 36198
+  },
+  "pronikayushchaya-gidroizolyaciya-mehanizm-primenenie": {
+   "file": "a/pronikayushchaya-gidroizolyaciya-mehanizm-primenenie.webp",
+   "bytes": 78876
+  },
+  "remont-betona-pri-otricatelnyh-temperaturah": {
+   "file": "a/remont-betona-pri-otricatelnyh-temperaturah.webp",
+   "bytes": 29704
+  },
+  "remont-betonnyh-konstrukcij-metody-materialy": {
+   "file": "a/remont-betonnyh-konstrukcij-metody-materialy.webp",
+   "bytes": 54224
+  },
+  "remont-betonnyh-polov-promyshlennyh-zdanij": {
+   "file": "a/remont-betonnyh-polov-promyshlennyh-zdanij.webp",
+   "bytes": 57000
+  },
+  "remont-mostovyh-opor-puteprovodov": {
+   "file": "a/remont-mostovyh-opor-puteprovodov.webp",
+   "bytes": 37974
+  },
+  "remont-zhelezobetonnyh-kolonn-balok": {
+   "file": "a/remont-zhelezobetonnyh-kolonn-balok.webp",
+   "bytes": 43476
+  },
+  "rovniteli-dlya-pola-klassifikaciya-vybor": {
+   "file": "a/rovniteli-dlya-pola-klassifikaciya-vybor.webp",
+   "bytes": 40546
+  },
+  "shtukaturno-kleevye-smesi-fasadnye-sistemy": {
+   "file": "a/shtukaturno-kleevye-smesi-fasadnye-sistemy.webp",
+   "bytes": 25020
+  },
+  "sp-28-13330-2017-obzor-trebovanij": {
+   "file": "a/sp-28-13330-2017-obzor-trebovanij.webp",
+   "bytes": 31256
+  },
+  "sp-63-13330-2018-betonnye-konstrukcii-obzor": {
+   "file": "a/sp-63-13330-2018-betonnye-konstrukcii-obzor.webp",
+   "bytes": 46354
+  },
+  "sp-72-13330-2016-zashhita-konstrukcij-ot-korrozii": {
+   "file": "a/sp-72-13330-2016-zashhita-konstrukcij-ot-korrozii.webp",
+   "bytes": 51594
+  },
+  "stroitelnaya-himiya-obzor-tehnologij-reks": {
+   "file": "a/stroitelnaya-himiya-obzor-tehnologij-reks.webp",
+   "bytes": 44868
+  },
+  "tehnicheskij-reglament-bezopasnosti-zdanij-fz384": {
+   "file": "a/tehnicheskij-reglament-bezopasnosti-zdanij-fz384.webp",
+   "bytes": 25852
+  },
+  "tiksotropnye-remontnye-smesi-svoystva-vybor": {
+   "file": "a/tiksotropnye-remontnye-smesi-svoystva-vybor.webp",
+   "bytes": 48390
+  },
+  "torkretirovanie-remont-betonnyh-konstrukcij": {
+   "file": "a/torkretirovanie-remont-betonnyh-konstrukcij.webp",
+   "bytes": 43310
+  },
+  "usilenie-zhelezobetonnyh-konstrukcij-kompozitami": {
+   "file": "a/usilenie-zhelezobetonnyh-konstrukcij-kompozitami.webp",
+   "bytes": 52830
+  },
+  "vosstanovlenie-zashhitnogo-sloya-betona": {
+   "file": "a/vosstanovlenie-zashhitnogo-sloya-betona.webp",
+   "bytes": 54264
+  },
+  "zashhita-betona-ot-korrozii-metody": {
+   "file": "a/zashhita-betona-ot-korrozii-metody.webp",
+   "bytes": 33634
+  }
+ },
+ "total_bytes": 6442524
+}

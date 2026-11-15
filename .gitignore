@@ -1,0 +1,43 @@
+﻿# Доступы — НИКОГДА не коммитить
+deploy/server.env
+*.pem
+*.key
+
+# Прайс-листы (4 уровня цен — коммерческая тайна)
+*.xlsx
+*.xls
+*.doc
+*.docx
+data/prices.json
+data/prices_prev_snapshot.json
+data/price_sync.json
+data/price_map_auto.json
+mapping.md
+
+# Неопубликованный контент
+unpublished/
+
+# Артефакты сборки и деплоя
+dist/
+shots/
+*.tar.gz
+
+# Резервные/временные копии модели
+data/model.backup.json
+data/model.before_articles.json
+
+# Служебное
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+
+# Скрэп-данные, дампы БД и внутренние отчёты (не нужны для сборки, могут быть чувствительными)
+data/rekspro/
+data/_db/
+data/seo_audit.json
+data/seo_live.json
+data/articles_report.json
+missing-images-rex.csv
+SEO-AUDIT.md
+STATUS.md
