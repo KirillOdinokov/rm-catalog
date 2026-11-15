@@ -33,7 +33,10 @@ __pycache__/
 .DS_Store
 
 # Скрэп-данные, дампы БД и внутренние отчёты (не нужны для сборки, могут быть чувствительными)
-data/rekspro/
+data/rekspro/*
+!data/rekspro/kb.json
+!data/rekspro/match.json
+!data/rekspro/manual_match.json
 data/_db/
 data/seo_audit.json
 data/seo_live.json
