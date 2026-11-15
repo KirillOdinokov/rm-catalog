@@ -330,7 +330,7 @@ def home():
 <section class="sec" style="background:#e9f4fb"><div class="wrap">
   <div class="sec__head"><div><div class="eyebrow"><b>02</b> — каталог</div>
     <h2>Что чаще всего заказывают</h2></div>
-    <div class="sec__lead">Цены указаны за единицу с НДС по прайсу от 10 сентября 2026 г.
+    <div class="sec__lead">Цены актуальные: за единицу с НДС 22%%, на условиях самовывоза.
     Минимальная сумма заказа —
     %s ₽. Для объёмных поставок готовим спецификацию и коммерческое предложение.</div></div>
   <div class="cards">%s</div>
@@ -414,8 +414,8 @@ def catalog():
     <div class="eyebrow"><b>каталог</b> — продукция РЕКС</div>
     <h1>%s позиций для гидроизоляции, ремонта и защиты бетона</h1>
     <p>Полный ассортимент: обмазочные и проникающие системы, инъекционные составы, гидрошпонки,
-    ремонтные смеси, промышленные полы, клеи и анкеры. Цены за единицу с НДС, минимальный
-    заказ — %s ₽.</p>
+    ремонтные смеси, промышленные полы, клеи и анкеры. Цены актуальные: за единицу с НДС 22%%,
+    на условиях самовывоза; минимальный заказ — %s ₽.</p>
     <div class="pagehead__meta"><span>направлений: <b>6</b></span><span>позиций: <b>%s</b></span>
     <span>документы: <b>на каждую партию</b></span></div>
   </div>
@@ -468,7 +468,7 @@ def category(slug):
     <span>документы: <b>сертификаты и паспорта</b></span></div>
   </div>
   <div style="padding:26px 0 6px">%s<div class="toolbar"><span class="toolbar__count">%d позиций</span>
-  <span class="toolbar__sp"></span><span class="toolbar__count" style="text-transform:none">Цены с НДС · прайс 10.09.2026</span></div></div>
+  <span class="toolbar__sp"></span><span class="toolbar__count" style="text-transform:none">Цены с НДС 22%% · самовывоз</span></div></div>
   <div class="cards">%s</div>
 </div>
 %s
@@ -564,7 +564,7 @@ def product(p):
       <p class="prod__lead">%s</p>
       <div class="prod__pricebox">
         %s
-        <div class="prod__note">Цена за единицу с НДС · прайс от 10.09.2026 · минимальный заказ %s ₽</div>
+        <div class="prod__note">Цена за единицу с НДС 22%% · самовывоз · минимальный заказ %s ₽</div>
       </div>
       <div class="prod__act">
         <a class="btn btn--acc" href="#zapros">Запросить счёт</a>
@@ -1157,7 +1157,7 @@ def calc_page(c):
 <section class="sec sec--tight"><div class="wrap">
   <div class="sec__head"><div><div class="eyebrow"><b>+</b> — материал</div>
     <h2>Что потребуется по этому расчёту</h2></div>
-    <div class="sec__lead">Цены за упаковку с НДС по прайсу от 10 сентября 2026 г.
+    <div class="sec__lead">Цены актуальные: за упаковку с НДС 22%%, на условиях самовывоза.
     Точную фасовку и расход уточняйте в техническом описании.</div></div>
   <div class="needlist">%s</div>
 </div></section>""" % rows_need
@@ -1233,7 +1233,7 @@ PAGE_PICKUP = """
   <li>Московская обл., Наро-Фоминский р-н, д. Софьино, уч. 136;</li>
   <li>Калужская обл., Боровский р-н, д. Добрино, 2-й Восточный проезд, вл. 8.</li>
 </ul>
-<p>Цены в прайс-листе указаны в рублях с учётом НДС и действуют с 10 сентября 2026 г.
+<p>Цены актуальные: в рублях с учётом НДС 22%, на условиях самовывоза.
  Для объёмов от 3 и от 10 тонн предусмотрены отдельные уровни цен — их рассчитает менеджер
  по вашей спецификации.</p>
 """

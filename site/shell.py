@@ -49,8 +49,8 @@ def head(title, desc, path, noindex=False, extra="", ld="", og_image=None, canon
 <link rel="apple-touch-icon" href="/assets/apple-touch.png">
 <link rel="preload" href="/assets/fonts/geologica-700-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts.css">
-<link rel="stylesheet" href="/assets/site.css?v=7">
-<script defer src="/assets/site.js?v=3"></script>
+<link rel="stylesheet" href="/assets/site.css?v=8">
+<script defer src="/assets/site.js?v=4"></script>
 %s
 %s
 </head>
@@ -77,8 +77,19 @@ def header(path, no_visit=False):
     for url, label in C.NAV:
         cur = ' aria-current="page"' if _nav_active(path, url) else ''
         links.append('<a class="nav__link" href="%s"%s>%s</a>' % (url, cur, label))
+    help_items = "".join('<a class="navdrop__link" href="%s">%s</a>' % (url, label)
+                         for url, label in C.NAV_HELP)
+    drop = ('<div class="navdrop">'
+            '<button class="nav__link navdrop__btn" type="button" aria-haspopup="true" '
+            'aria-expanded="false">Помощь'
+            '<span class="navdrop__caret" aria-hidden="true"></span></button>'
+            '<div class="navdrop__panel"><div class="navdrop__title">%s</div>%s</div></div>'
+            % (esc(C.NAV_HELP_TITLE), help_items))
     mob = []
     for url, label in C.NAV:
+        mob.append('<a class="mob__link" href="%s">%s <small>→</small></a>' % (url, label))
+    mob.append('<div class="mob__cap">%s</div>' % esc(C.NAV_HELP_TITLE))
+    for url, label in C.NAV_HELP:
         mob.append('<a class="mob__link" href="%s">%s <small>→</small></a>' % (url, label))
     mob_visit = "" if no_visit else (
         '<a class="btn btn--acc" href="%s">%s %s</a>' % (C.VISIT_URL, art.icon("helmet"),
@@ -89,7 +100,7 @@ def header(path, no_visit=False):
     <span class="brand__mark">%s</span>
     <span class="brand__txt"><span class="brand__name">РЕКС</span><span class="brand__sub">Инженерная химия</span></span>
   </a>
-  <nav class="nav" aria-label="Основная навигация">%s</nav>
+  <nav class="nav" aria-label="Основная навигация">%s%s</nav>
   <span class="hdr__sp"></span>
   <a class="hdr__phone" href="%s">%s<span class="hdr__phoneT"><b>%s</b><span>%s</span></span></a>
   <a class="btn btn--acc hdr__cta" href="#zapros">Запросить прайс</a>
@@ -103,8 +114,8 @@ def header(path, no_visit=False):
     <a class="btn btn--ghost" href="%s">%s</a>
   </div>
 </div></div>
-</header>""" % (art.mark(), "".join(links), C.PHONE_HREF, art.icon("phone"), C.PHONE, esc(C.HOURS),
-               "".join(mob), mob_visit, C.PHONE_HREF, C.PHONE)
+</header>""" % (art.mark(), "".join(links), drop, C.PHONE_HREF, art.icon("phone"), C.PHONE,
+               esc(C.HOURS), "".join(mob), mob_visit, C.PHONE_HREF, C.PHONE)
 
 
 def crumbs(items):

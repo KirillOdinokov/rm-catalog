@@ -19,6 +19,31 @@
     });
   }
 
+  // выпадающая группа «Помощь»: мышью открывается на hover (CSS), клавиатурой — по Enter/Space
+  var drop = document.querySelector('.navdrop');
+  if (drop) {
+    var dropBtn = drop.querySelector('.navdrop__btn');
+    var setDrop = function (open) {
+      drop.classList.toggle('open', open);
+      if (dropBtn) dropBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    if (dropBtn) {
+      dropBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        setDrop(!drop.classList.contains('open'));
+      });
+    }
+    document.addEventListener('click', function (e) {
+      if (!drop.contains(e.target)) setDrop(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && drop.classList.contains('open')) {
+        setDrop(false);
+        if (dropBtn) dropBtn.focus();
+      }
+    });
+  }
+
   // кнопка наверх
   var up = document.getElementById('up');
   if (up) {
