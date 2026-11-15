@@ -75,9 +75,15 @@
   склеивает продублированные разделы (в 12 статьях план был продублирован), строит
   оглавление, перебрендирует `meta_title` / `meta_description` и пишет тело в
   `content/articles/<slug>.html` (в модели — `file`).
-- Расписание: **200 статей, 2 в день, 16.11.2026 → 23.02.2027** (100 дат), кластеры вперемешку,
-  внутри — по `rex_score`. Пересобрать с другими датами: `--start YYYY-MM-DD --per-day N`,
-  проверка без записи — `--dry`.
+- Расписание: **200 статей, по одной в рабочий день, 16.11.2026 → 02.09.2027** — выходные и
+  праздники пропускаются (список в `HOLIDAYS` в `tools/reschedule_articles.py`, пополнять по
+  производственному календарю). Пересобрать: `python tools/reschedule_articles.py --start …`;
+  импорт с нуля — `import_future_articles.py --start … --per-day N` (проверка — `--dry`).
+- В каждую статью добавлен блок **«Материалы РЕКС по теме»** (таблица: материал, назначение,
+  ключевые показатели из базы знаний + ссылки на карточки) — `tools/enrich_future_articles.py`,
+  вставка перед «Литературой», с пунктом в оглавлении. Пакет промптов для обложек —
+  `flux-prompts.csv` (`tools/make_flux_prompts.py`): `id` (post_id), `prompt` (английский,
+  16:9, без людей/кириллицы, марка «Rex.moscow» на объекте), `aspect_ratio`.
 - Обложек у пакета нет: карточки рисуют «пластину» направления (CSS), фото не нужны.
 
 ## Контакты (как на старом сайте, `site/config.py`)
@@ -293,7 +299,7 @@ $py13 = 'C:\Users\Кирилл\AppData\Local\Programs\Python\Python313\python.ex
   pack, unit, price_level, price_date`
 - `cats[]` — `id, slug, name, parent, count, meta_title, meta_desc, desc`
 - `pages[]` — служебные страницы из архива (`slug`, `title`, `content` в разметке WP)
-- `posts[]` — 75 статей (`title, slug, category, content_len, …`)
+- `posts[]` — 275 статей (75 старых + 200 импортированных с отложенной публикацией)
 - `calcs[]` — 30 калькуляторов (метаданные), формулы и поля — в `site/pages.py` / `site/content.py`
 
 Структура каталога (6 направлений) задана в `site/config.py` → `GROUPS`.
