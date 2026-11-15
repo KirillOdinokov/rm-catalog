@@ -49,7 +49,7 @@ def head(title, desc, path, noindex=False, extra="", ld="", og_image=None, canon
 <link rel="apple-touch-icon" href="/assets/apple-touch.png">
 <link rel="preload" href="/assets/fonts/geologica-700-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts.css">
-<link rel="stylesheet" href="/assets/site.css?v=8">
+<link rel="stylesheet" href="/assets/site.css?v=9">
 <script defer src="/assets/site.js?v=4"></script>
 %s
 %s

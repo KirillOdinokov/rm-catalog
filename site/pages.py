@@ -34,13 +34,38 @@ def _visible_post(p):
     return pa <= date.today().isoformat()
 
 
+def _post_date(p):
+    """Дата для порядка в блоге: publish_at, иначе дата из post_dates.json."""
+    d = (p.get("publish_at") or (POST_DATES.get(p.get("slug")) or {}).get("published") or "").strip()
+    m = re.match(r"^(\d{2})\.(\d{2})\.(\d{4})$", d)
+    if m:
+        d = "%s-%s-%s" % (m.group(3), m.group(2), m.group(1))
+    return d
+
+
+def _post_body(a):
+    """Тело статьи: из модели или из отдельного файла content/articles/<slug>.html."""
+    c = a.get("content")
+    if c:
+        return c
+    name = a.get("file")
+    if not name:
+        return ""
+    path = os.path.join(C.BASE, "content", name)
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
+            return f.read()
+    return ""
+
+
 class Model(object):
     def __init__(self):
         m = json.load(open(os.path.join(C.DATA, "model.json"), encoding="utf-8"))
         self.products = m["products"]
         self.cats = m["cats"]
         self.pages = {p["slug"]: p for p in m["pages"]}
-        self.posts = [p for p in m["posts"] if _visible_post(p)]
+        self.posts = sorted((p for p in m["posts"] if _visible_post(p)),
+                            key=_post_date, reverse=True)
         self.calcs = m["calcs"]
         self.by_slug = {p["slug"]: p for p in self.products}
         self.cat_by = {c["slug"]: c for c in self.cats}
@@ -294,7 +319,7 @@ def home():
 
     kpi = "".join('<div><b>%s</b><span>%s</span></div>' % (esc(v), esc(t)) for v, t in facts_list)
 
-    body = """
+    body = ("""
 <section class="hero"><div class="wrap hero__in">
   <div>
     <div class="hero__eyebrow mono"><i></i> %s · с 2014 года</div>
@@ -366,7 +391,7 @@ def home():
 <section class="sec"><div class="wrap">
   <div class="sec__head"><div><div class="eyebrow"><b>05</b> — инженерия</div>
     <h2>Разбираем узлы в блоге</h2></div>
-    <div class="sec__lead">75 технических статей: технологии, ошибки, нормативы и разбор
+    <div class="sec__lead">{{N_POSTS}} технических статей: технологии, ошибки, нормативы и разбор
     конкретных узлов гидроизоляции и ремонта.</div></div>
   <div class="groups">%s</div>
   <div style="margin-top:26px;display:flex;gap:10px;flex-wrap:wrap">
@@ -380,7 +405,7 @@ def home():
            "финиш и герметизация примыканий."),
        "".join(groups), "{:,}".format(C.MIN_ORDER).replace(",", " "), popular_html,
        art.icon("arrow"), tasks, "<div style=\"margin-top:26px\">%s</div>" % shell.visit_cta(),
-       kpi, standards, C.EMAIL, arts)
+       kpi, standards, C.EMAIL, arts)).replace("{{N_POSTS}}", str(len(m.posts)))
 
     body += shell.cta_band()
     body += shell.lead_form()
@@ -614,13 +639,29 @@ def product(p):
 
 
 # ------------------------------------------------------------------ блог
+POST_CATS = {
+    "gidroizolyaciya": "Гидроизоляция бетона",
+    "remont-betona": "Ремонт бетона",
+    "promyshlennye-poly": "Промышленные полы",
+    "zashhita-betona": "Защита бетона и ЖБИ",
+    "kleevye-ankernye-sistemy": "Крепёж и клеевые системы",
+    "inekcionnye-tehnologii": "Инъекционные технологии",
+    "stroitelnye-normy": "Нормативы и расчёт",
+}
+
+
 def blog_index():
     m = model()
 
     def art_card(a):
         cov = images.article(a)
-        cover = ('<div class="group__cover">%s</div>'
-                 % images.tag(cov, esc(a["title"]), w=760, h=428)) if cov else '<div class="group__cover group__cover--empty"></div>'
+        if cov:
+            cover = ('<div class="group__cover">%s</div>'
+                     % images.tag(cov, esc(a["title"]), w=760, h=428))
+        else:
+            cat = POST_CATS.get(a.get("category"), "Инженерный разбор")
+            cover = ('<div class="group__cover group__cover--plate">'
+                     '<span class="group__plateT">%s</span></div>' % esc(cat))
         return """
 <a class="group group--art" href="/%s">
   %s
@@ -638,19 +679,20 @@ def blog_index():
   <div class="pagehead">
     <div class="eyebrow"><b>блог</b> — инженерные разборы</div>
     <h1>Технологии, нормативы и разбор узлов</h1>
-    <p>75 статей о гидроизоляции, ремонте и защите бетона: как работают материалы, какие
+    <p>%d статей о гидроизоляции, ремонте и защите бетона: как работают материалы, какие
     ошибки встречаются на объектах и что требуют нормативы.</p>
     <div class="pagehead__meta"><span>статей: <b>%d</b></span><span>разделов: <b>7</b></span></div>
   </div>
   <div class="groups" style="margin:28px 0 10px">%s</div>
 </div>
 <div class="wrap">%s</div>
-""" % (shell.crumbs([("/blog", "Блог")]), len(m.posts), cards, shell.visit_cta())
+""" % (shell.crumbs([("/blog", "Блог")]), len(m.posts), len(m.posts), cards, shell.visit_cta())
     body += shell.cta_band()
     ld = schema.dumps(
         schema.breadcrumbs([("/blog", "Блог")]),
-        schema.collection("/blog", "Блог РЕКС", "75 технических статей о гидроизоляции, "
-                          "ремонте и защите бетона.", [("/" + a["slug"], a["title"]) for a in m.posts]))
+        schema.collection("/blog", "Блог РЕКС", "%d технических статей о гидроизоляции, "
+                          "ремонте и защите бетона." % len(m.posts),
+                          [("/" + a["slug"], a["title"]) for a in m.posts]))
     return shell.page("/blog", "Блог РЕКС — гидроизоляция, ремонт и защита бетона",
                       "Технические статьи о гидроизоляции бетона, ремонтных составах, промышленных "
                       "полах и нормативах: технологии, ошибки, разбор узлов.", body, ld=ld)
@@ -727,7 +769,7 @@ def article(a):
                 ["/" + c["slug"] for c in m.calcs] +
                 ["/blog", "/shop", "/kalkulyatory", "/kontakty", "/politika-konfidencialnosti"] +
                 [u for u, _n in C.INFO_PAGES])
-    body_html = _fix_article(a["content"], known)
+    body_html = _fix_article(_post_body(a), known)
     cov = images.article(a)
     cover_html = ('<img class="art__cover" src="/assets/img/%s" alt="%s" width="760" height="428" '
                   'loading="eager" decoding="async">' % (cov, esc(a["title"]))) if cov else ""

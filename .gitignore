@@ -1,4 +1,4 @@
-﻿# Доступы — НИКОГДА не коммитить
+# Доступы — НИКОГДА не коммитить
 deploy/server.env
 *.pem
 *.key
@@ -44,3 +44,6 @@ data/articles_report.json
 missing-images-rex.csv
 SEO-AUDIT.md
 STATUS.md
+
+# Исходный пакет статей (200 html + metadata.csv): тексты уже разобраны в content/articles/
+articles-future/

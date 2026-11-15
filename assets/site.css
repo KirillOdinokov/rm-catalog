@@ -479,6 +479,9 @@ p:last-child { margin-bottom: 0; }
 .prod__scheme svg { width: 100%; height: auto; display: block; }
 .group--art { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
 .group__cover { aspect-ratio: 16 / 9; background: #e9f4fb; overflow: hidden; }
+.group__cover--plate { position: relative; display: flex; align-items: flex-end; padding: 16px 18px; border-bottom: 1px solid var(--line); background-color: #eef7fd; background-image: linear-gradient(#ddecf7 1px, transparent 1px), linear-gradient(90deg, #ddecf7 1px, transparent 1px); background-size: 36px 36px; }
+.group__cover--plate::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--acc); }
+.group__plateT { font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: #456a83; }
 .group__cover img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s var(--ease); }
 .group--art:hover .group__cover img { transform: scale(1.03); }
 .group__body { padding: 18px 22px 20px; display: flex; flex-direction: column; gap: 2px; }
