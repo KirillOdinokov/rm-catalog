@@ -26,12 +26,47 @@ API_URL = os.environ.get(
 
 TITLE_TAIL = " - купить по цене %d руб с НДС"
 TITLE_NOPRICE = " - характеристики, аналоги, цена по запросу"
+TITLE_NOPRICE_SHORT = " - характеристики, цена по запросу"
+TITLE_MAX = 70
 PRICE_RE = re.compile(r"по цене\s*[\d\s]+\s*руб")
+PRICE_TAIL_RE = re.compile(r"\s+[-–—]\s+купить по цене\s*[\d\s]*\s*руб с НДС$")
+LEGACY_TAIL_RE = re.compile(r"\s+[-–—]\s+(?=(?:купить|характеристик|техническ|цена по запросу))", re.I)
 
 
-def title_with_price(old, price):
-    base = re.sub(r"\s*[-—]\s*.*$", "", old or "").strip() or ""
-    return base + (TITLE_TAIL % price if price else TITLE_NOPRICE)
+def title_base(old, name=""):
+    """Название без хвоста «… - купить по цене …» / «… - характеристики …».
+
+    Резать по первому дефису нельзя: в «Анкерная шпилька SKA-F 10×100» и
+    «РЕКС® МСЦ-АНТИГЛИНА» дефис — часть названия. Именно из-за этого 17 карточек
+    теряли размер/вариант и получали одинаковый title.
+    """
+    s = (old or "").strip()
+    for tail in (TITLE_NOPRICE, TITLE_NOPRICE_SHORT):
+        if s.endswith(tail):
+            s = s[:-len(tail)].strip()
+            break
+    else:
+        m = PRICE_TAIL_RE.search(s)
+        if m:
+            s = s[:m.start()].strip()
+    m = LEGACY_TAIL_RE.search(s)  # остатки старых WP-хвостов
+    if m:
+        s = s[:m.start()].strip()
+    return s or (name or "").strip()
+
+
+def title_with_price(old, price, name=""):
+    """Title = база (старый title или название) + хвост по цене.
+
+    Хвост берём самый длинный из тех, что укладываются в 70 знаков: иначе product_title()
+    обрежет title при рендере. Не влезло ничего — оставляем длинный хвост, его обрежет рендер.
+    """
+    base = title_base(old, name)
+    tails = [TITLE_TAIL % price] if price else [TITLE_NOPRICE, TITLE_NOPRICE_SHORT]
+    for tail in tails:
+        if len(base) + len(tail) <= TITLE_MAX:
+            return base + tail
+    return base + tails[0]
 
 
 def fetch_prices():
@@ -58,14 +93,14 @@ def main():
         p["price"] = new
         p["old"] = 0
         p["price_level"] = "retail"
-        p["meta_title"] = title_with_price(p.get("meta_title"), new)
+        p["meta_title"] = title_with_price(p.get("meta_title"), new, p.get("name"))
         (changed if new != old else same).append((slug, p["name"], old, new))
 
     for p in model["products"]:
         if not p.get("price"):
             t = p.get("meta_title") or ""
             if PRICE_RE.search(t):
-                p["meta_title"] = title_with_price(t, 0)
+                p["meta_title"] = title_with_price(t, 0, p.get("name"))
 
     if changed:
         os.makedirs(os.path.dirname(BACKUP), exist_ok=True)

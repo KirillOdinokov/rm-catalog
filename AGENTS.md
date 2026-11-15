@@ -99,6 +99,7 @@ cd E:\Сайты\rex.moscow
 & $py tools\seo_live.py           # живые проверки: редиректы, сжатие, Core Web Vitals
 & $py tools\build_price_map.py    # автодополнение карты «карточка -> строка прайса» (--apply)
 & $py tools\export_mapping.py     # -> mapping.md: полная карта соответствия прайсу
+& $py tools\fix_titles.py         # meta_title: дубли и обрезки названия по внутреннему дефису
 ```
 
 Обновление цен — отдельная процедура, см. «Прайс и цены» ниже.
@@ -330,6 +331,10 @@ $py13 = 'C:\Users\Кирилл\AppData\Local\Programs\Python\Python313\python.ex
    `description` — через `trim_desc()` (≤ 175, по границе предложения), дубли описаний
    отслеживает `Model.desc_owner`. Новую страницу подключаем к `schema.dumps(...)`, иначе
    она останется без разметки (проверяется `tools\seo_audit.py`).
+   В названиях есть внутренние дефисы («Анкерная шпилька SKA-F 10×100», «РЕКС® анти-капилляр»,
+   «РЕКС® МСЦ-АНТИГЛИНА») — **нельзя отрезать хвост title по первому дефису**, иначе title
+   теряет размер и становится одинаковым у всей линейки. Нормализатор —
+   `sync_prices.title_with_price()` / `title_base()`, чинится `tools\fix_titles.py`.
 10. **Удаляя страницу, ставим 301.** Товар или раздел, ушедший с сайта, получает `rewrite`
     в `dist_nginx\delivery-rex.moscow-ssl.conf` и строку в `rex-redirects.txt`
     (см. пример `/hacut-ochistitel-2`).

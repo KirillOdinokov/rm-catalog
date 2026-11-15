@@ -122,13 +122,10 @@ if os.path.exists(AUTO_MAP_FILE):
         print("не прочитал %s: %s" % (AUTO_MAP_FILE, _e))
 
 PRICE_RE = re.compile(r"по цене\s*[\d\s]+\s*руб")
-TITLE_TAIL = " - купить по цене %d руб с НДС"
-TITLE_NOPRICE = " - характеристики, аналоги, цена по запросу"
 
-
-def title_with_price(old, price):
-    base = re.sub(r"\s*[-—]\s*.*$", "", old or "").strip() or ""
-    return base + (TITLE_TAIL % price if price else TITLE_NOPRICE)
+# нормализатор title общий с синком цен из Базы: ручной путь тоже не должен резать
+# название по внутреннему дефису («SKA-F 10×100», «анти-капилляр»)
+from sync_prices import title_with_price  # noqa: E402
 
 
 def main():
