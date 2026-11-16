@@ -53,8 +53,10 @@ def sitemaps(uid, hid, token):
                  "  [добавлен вручную]" if s.get("sitemap_id") in added_ids else ""))
         if s.get("last_access_date"):
             print("      последнее скачивание: %s" % s["last_access_date"][:16])
-    if not "sitemap.xml" in "".join(s.get("sitemap_url", "") for s in allsm):
-        print("  ! нашего sitemap.xml в списке нет — добавить: --add-sitemap https://%s/sitemap.xml"
+    # в Вебмастере наш sitemap живёт под именем sitemap_index.xml (имя сменить нельзя,
+    # POST-методы API отдают 504) — сборка пишет один и тот же файл под двумя именами
+    if "sitemap_index.xml" not in "".join(s.get("sitemap_url", "") for s in allsm):
+        print("  ! в списке нет sitemap_index.xml — добавить: --add-sitemap https://%s/sitemap_index.xml"
               % "rex.moscow")
     return allsm, added
 

@@ -127,7 +127,13 @@ def sitemap(urls, dates=None):
         items.append(node)
     xml = ('<?xml version="1.0" encoding="UTF-8"?>'
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(items) + "</urlset>")
-    open(os.path.join(C.DIST, "sitemap.xml"), "w", encoding="utf-8").write(xml)
+    # Два одинаковых файла под разными именами — вынужденно:
+    #  - sitemap_index.xml — этот адрес зашит в Яндекс.Вебмастере (смена файла на стороне
+    #    Яндекса недоступна с 16.11.2026, POST-методы API отдают 504), имя осталось от Yoast;
+    #  - sitemap.xml — этот адрес подан в Google Search Console и указан в robots.txt раньше.
+    # Содержимое одно и то же, поддерживать надо оба.
+    for name in ("sitemap.xml", "sitemap_index.xml"):
+        open(os.path.join(C.DIST, name), "w", encoding="utf-8").write(xml)
     return len(urls)
 
 
@@ -233,9 +239,11 @@ def main():
     open(os.path.join(C.BASE, "dist_nginx", "rex-redirects.txt"), "w", encoding="utf-8").write("\n".join(lines) + "\n")
 
     n = sitemap(urls, dates)
+    # в robots.txt — имя, которое знает Яндекс.Вебмастер (sitemap_index.xml);
+    # sitemap.xml живёт для Google Search Console, он подан там вручную
     open(os.path.join(C.DIST, "robots.txt"), "w", encoding="utf-8").write(
         "User-agent: *\nAllow: /\nDisallow: /search\nClean-param: utm_source&utm_medium&utm_campaign\n"
-        "Sitemap: %s/sitemap.xml\n" % C.SITE)
+        "Sitemap: %s/sitemap_index.xml\n" % C.SITE)
     idx = search_index(m)
 
     files = sum(len(fs) for _r, _d, fs in os.walk(C.DIST))
