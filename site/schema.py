@@ -115,7 +115,7 @@ def product(p, path, desc, category, pack, image=None):
     return node
 
 
-def article(a, path, cover=None, published="", modified=""):
+def article(a, path, cover=None, published="", modified="", section=""):
     node = {
         "@type": "Article",
         "@id": C.SITE + path + "#article",
@@ -125,11 +125,12 @@ def article(a, path, cover=None, published="", modified=""):
         "inLanguage": "ru-RU",
         "author": {"@type": "Organization", "name": "РЕКС", "url": C.SITE},
         "publisher": {"@id": C.SITE + "/#org"},
+        "image": [C.SITE + "/assets/img/" + cover] if cover else [C.SITE + "/assets/og.jpg"],
     }
+    if section:
+        node["articleSection"] = section
     if a.get("meta_desc"):
         node["description"] = a["meta_desc"]
-    if cover:
-        node["image"] = [C.SITE + "/assets/img/" + cover]
     if published:
         node["datePublished"] = published
     node["dateModified"] = modified or published or ""

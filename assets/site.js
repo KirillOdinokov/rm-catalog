@@ -136,6 +136,25 @@
     run();
   }
 
+  // цели Яндекс.Метрики (работают, только если счётчик включён в config.py)
+  var goal = function (name) {
+    var id = window.__ymId || 0;
+    if (!id || !window.ym) return;
+    try { window.ym(id, 'reachGoal', name); } catch (e) {}
+  };
+  document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
+    a.addEventListener('click', function () { goal('phone'); });
+  });
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) {
+    a.addEventListener('click', function () { goal('email'); });
+  });
+  document.querySelectorAll('#leadForm').forEach(function (form) {
+    form.addEventListener('submit', function () { goal('lead'); });
+  });
+  document.querySelectorAll('a[href*="vyezd-menedzhera"]').forEach(function (a) {
+    a.addEventListener('click', function () { goal('visit'); });
+  });
+
   // плавный переход к якорям внутри страницы
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) {

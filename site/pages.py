@@ -174,13 +174,20 @@ def product_title(p):
 
 
 def product_desc(p, m, ct):
-    """Description: уникальный (без повторов), не длиннее 175 знаков."""
+    """Description: уникальный (без повторов), не длиннее 175 знаков.
+
+    Из доступных вариантов берём самый информативный: у части карточек описание из
+    кластера короче 70 знаков, а в модели лежит нормальный текст на 150–160.
+    """
+    cands = []
     if ct.get("meta"):
-        return trim_desc(ct["meta"])
+        cands.append(trim_desc(ct["meta"]))
     d = (p.get("meta_desc") or "").strip()
     if d and m.desc_owner(d) == p["slug"]:
-        return trim_desc(d)
-    return trim_desc(ct["lead"])
+        cands.append(trim_desc(d))
+    if ct.get("lead"):
+        cands.append(trim_desc(ct["lead"]))
+    return max(cands, key=len) if cands else ""
 
 
 def cat_title(c):
@@ -822,7 +829,8 @@ def article(a):
             else (a["title"] + " | РЕКС")
     desc = trim_desc(a.get("meta_desc") or re.sub(r"<[^>]+>", " ", body_html)[:170])
     ld = schema.dumps(
-        schema.article(a, "/" + a["slug"], cov, pub, dt.get("modified", "")),
+        schema.article(a, "/" + a["slug"], cov, pub, dt.get("modified", ""),
+                       POST_CATS.get(a.get("category"), "")),
         schema.breadcrumbs([("/blog", "Блог"), ("", a["title"])]))
     og = (C.SITE + "/assets/img/" + cov) if cov else None
     return shell.page("/" + a["slug"], title, desc, body, ld=ld, og_image=og)

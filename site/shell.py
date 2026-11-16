@@ -29,6 +29,11 @@ def head(title, desc, path, noindex=False, extra="", ld="", og_image=None, canon
 <meta name="twitter:title" content="%s">
 <meta name="twitter:description" content="%s">
 <meta name="twitter:image" content="%s">""" % (esc(img), esc(title), esc(desc), esc(img))
+    verify = ""
+    if C.VERIFY_YANDEX:
+        verify += '<meta name="yandex-verification" content="%s">\n' % esc(C.VERIFY_YANDEX)
+    if C.VERIFY_GOOGLE:
+        verify += '<meta name="google-site-verification" content="%s">\n' % esc(C.VERIFY_GOOGLE)
     return """<!doctype html>
 <html lang="ru">
 <head>
@@ -45,17 +50,17 @@ def head(title, desc, path, noindex=False, extra="", ld="", og_image=None, canon
 <meta property="og:url" content="%s">
 %s
 <meta name="theme-color" content="#0088cc">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+%s<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch.png">
 <link rel="preload" href="/assets/fonts/geologica-700-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts.css">
 <link rel="stylesheet" href="/assets/site.css?v=9">
-<script defer src="/assets/site.js?v=4"></script>
+<script defer src="/assets/site.js?v=5"></script>
 %s
 %s
 </head>
 <body>""" % (esc(title), esc(desc), robots, can_tag, esc(C.FULL), esc(title), esc(desc),
-               cur, social, extra, ld)
+               cur, social, verify, extra, ld)
 
 
 def topbar(no_visit=False):
@@ -189,6 +194,31 @@ def lead_form(title="Запросить прайс и расчёт", text="Пр�
                         art.icon("clock"), esc(C.HOURS), C.EMAIL)
 
 
+def analytics():
+    """Яндекс.Метрика: выводится, только если в config.py задан METRIKA_ID."""
+    try:
+        mid = int(C.METRIKA_ID or 0)
+    except (TypeError, ValueError):
+        mid = 0
+    if not mid:
+        return ""
+    wv = "true" if C.METRIKA_WEBVISOR else "false"
+    return """
+<!-- Yandex.Metrika counter -->
+<script>
+window.__ymId = %d;
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();
+for (var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(%d,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:%s});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/%d" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<!-- /Yandex.Metrika counter -->
+""" % (mid, mid, wv, mid)
+
+
 def footer(no_visit=False):
     groups = "".join('<a href="/%s">%s</a>' % (s, esc(n)) for s, n, _d, _i in C.GROUPS)
     info = "".join('<a href="%s">%s</a>' % (u, esc(n)) for u, n in C.INFO_PAGES)
@@ -225,13 +255,13 @@ def footer(no_visit=False):
   </div>
 </div></footer>
 <button class="up" id="up" aria-label="Наверх">↑</button>
-</body></html>""" % (art.mark(), esc(C.DEALER), visit, groups, info,
+%s</body></html>""" % (art.mark(), esc(C.DEALER), visit, groups, info,
                     C.PHONE_HREF, art.icon("phone"), esc(C.PHONE),
                     C.EMAIL, art.icon("mail"), C.EMAIL,
                     art.icon("pin"), esc(C.ADDR),
                     art.icon("pin"), esc(C.ADDR_2),
                     art.icon("clock"), esc(C.HOURS),
-                    "Информация на сайте не является публичной офертой")
+                    "Информация на сайте не является публичной офертой", analytics())
 
 
 def page(path, title, desc, body, noindex=False, extra_head="", no_visit=False,
