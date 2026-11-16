@@ -90,6 +90,7 @@ MAP = {
     "reks-fiks-akrep": (RIZB, 131, 0),
     "reks-epo-rezin": (RIZB, 135, 1),
     "reks-fiks-epo-t": (RIZB, 137, 0),
+    "reks-fiks-epo-t-krasnyj-bystryj-20-min": (RIZB, 138, 0),
     "reks-epo-uni-shot-long": (RIZB, 139, 0),
     "reks-klej-pljus": (RIZB, 142, 0),
     # --- инъекции
