@@ -106,6 +106,21 @@
   в статусе `siteOwner`, sitemap принят (0 ошибок).
 - **Яндекс.Вебмастер** — подтверждение мета-тегом, действие в кабинете («Проверить»);
   после подтверждения: отправить sitemap, указать регион «Москва», привязать счётчик Метрики.
+- **API Метрики и Вебмастера** — приложение Яндекс OAuth `2461a870ef624eb882a48750b44de5a0`
+  (тип «Для доступа к API», redirect_uri зашит на `https://oauth.yandex.ru/verification_code`).
+  Client ID / Secret — в `deploy/yandex-oauth.env` (в git **не** попадает, как `server.env`),
+  токен — в `deploy/yandex-token.json` (тоже в `.gitignore`). Инструмент — `tools/ya_api.py`:
+
+  ```
+  python tools\ya_api.py --url       # ссылка «Разрешить» для нужного аккаунта Яндекса
+  python tools\ya_api.py --code <код|ссылка>   # обмен кода на токен (сохраняет в deploy/)
+  python tools\ya_api.py --login     # проверка: счётчики Метрики + хосты Вебмастера
+  python tools\ya_api.py --stats 28  # сводка Метрики за 28 дней
+  python tools\ya_api.py --refresh   # обновить по refresh_token
+  ```
+
+  Заголовок запросов — `Authorization: OAuth <token>`; API — `api-metrika.yandex.net` и
+  `api.webmaster.yandex.net/v4`. Токен живёт около года, дальше `--refresh` (или заново код).
 - **Файлы подтверждения прав** (`google<hex>.html`, `yandex_<hex>.html`) лежат в корне проекта
   и копируются в сборку как есть — `build.py` → `copy_root_files()` (маска `google*`/`yandex_*`).
   Сейчас: `google20d7eb421f9e86fc.html` → `https://rex.moscow/google20d7eb421f9e86fc.html`

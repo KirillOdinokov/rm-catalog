@@ -1,5 +1,7 @@
 # Доступы — НИКОГДА не коммитить
 deploy/server.env
+deploy/yandex-oauth.env
+deploy/yandex-token.json
 *.pem
 *.key
 
