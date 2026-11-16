@@ -115,19 +115,25 @@ def get_token(cfg):
     return tok["access_token"]
 
 
-def api(url, token, params=None):
+def api(url, token, params=None, method="GET", body=None):
     if params:
         url = "%s?%s" % (url, urllib.parse.urlencode(params))
-    req = urllib.request.Request(url, headers={
+    data = None
+    headers = {
         "Authorization": "OAuth %s" % token,
         "User-Agent": "rex.moscow-tools/1.0",
-    })
+    }
+    if body is not None:
+        data = json.dumps(body, ensure_ascii=False).encode("utf-8")
+        headers["Content-Type"] = "application/json"
+    req = urllib.request.Request(url, data=data, method=method, headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=60) as r:
-            return json.loads(r.read().decode("utf-8"))
+            raw = r.read().decode("utf-8")
+            return json.loads(raw) if raw.strip() else {}
     except urllib.error.HTTPError as e:
         text = e.read().decode("utf-8", "replace")
-        sys.exit("HTTP %s %s\n%s" % (e.code, url, text[:800]))
+        sys.exit("HTTP %s %s %s\n%s" % (e.code, method, url, text[:800]))
 
 
 def cmd_url(cfg):
@@ -215,6 +221,53 @@ def cmd_stats(cfg, days):
         print("  %-18s %.1f" % (k, v))
 
 
+GOALS_JS = [
+    ("phone", "Клик по телефону (reachGoal phone)"),
+    ("email", "Клик по e-mail (reachGoal email)"),
+    ("lead", "Отправка заявки (reachGoal lead)"),
+    ("visit", "Вызов специалиста на объект (reachGoal visit)"),
+]
+
+
+def cmd_goals(cfg, create=False):
+    token = get_token(cfg)
+    cid = cfg.get("METRIKA_ID")
+    if not cid:
+        sys.exit("в deploy/yandex-oauth.env не задан METRIKA_ID")
+    url = "%s/management/v1/counter/%s/goals" % (METRIKA_API, cid)
+    data = api(url, token, {"per_page": 200})
+    goals = data.get("goals", [])
+    have = set()
+    print("счётчик %s: целей %d" % (cid, len(goals)))
+    for g in goals:
+        mark = ""
+        if g.get("type") == "action":
+            for c in g.get("conditions") or []:
+                ident = c.get("url") or ""
+                if ident in dict(GOALS_JS):
+                    have.add(ident)
+                    mark = "  <-- JS-событие"
+        print("  %-6s %-12s %-45s%s" % (g.get("id"), g.get("type"),
+                                        g.get("name", "")[:45], mark))
+    missing = [x for x in GOALS_JS if x[0] not in have]
+    if not missing:
+        print("\nвсе четыре JS-цели на месте")
+        return
+    print("\nне хватает: %s" % ", ".join(m[0] for m in missing))
+    if not create:
+        print("создать: python tools\\ya_api.py --goals-init")
+        return
+    for ident, name in missing:
+        res = api(url, token, method="POST", body={"goal": {
+            "name": name,
+            "type": "action",
+            "conditions": [{"type": "exact", "url": ident}],
+            "is_favorite": 0,
+        }})
+        g = res.get("goal", {})
+        print("создана: %-6s %s (%s)" % (g.get("id"), g.get("name"), ident))
+
+
 def main():
     p = argparse.ArgumentParser(description="Токен и проверки API Яндекса (Метрика, Вебмастер)")
     p.add_argument("--url", action="store_true", help="ссылка для получения кода")
@@ -222,6 +275,8 @@ def main():
     p.add_argument("--refresh", action="store_true", help="обновить токен по refresh_token")
     p.add_argument("--login", action="store_true", help="проверить доступ: счётчики и хосты")
     p.add_argument("--stats", type=int, metavar="DAYS", help="сводка Метрики за N дней")
+    p.add_argument("--goals", action="store_true", help="показать цели Метрики")
+    p.add_argument("--goals-init", action="store_true", help="создать недостающие JS-цели")
     a = p.parse_args()
     cfg = load_env()
     if a.url:
@@ -234,6 +289,10 @@ def main():
         cmd_login(cfg)
     elif a.stats:
         cmd_stats(cfg, a.stats)
+    elif a.goals:
+        cmd_goals(cfg)
+    elif a.goals_init:
+        cmd_goals(cfg, create=True)
     else:
         p.print_help()
 

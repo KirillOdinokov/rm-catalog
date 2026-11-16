@@ -97,15 +97,40 @@
 
 - Код Метрики (`shell.analytics()`) в конце каждой страницы + `noscript`-пиксель, задаёт
   `window.__ymId`; при `METRIKA_ID = 0` в HTML ничего не выводится.
-- Цели размечены в `assets/site.js`: `phone`, `email`, `lead`, `visit` — их нужно один раз
-  создать в кабинете Метрики (тип «JavaScript-событие») с теми же идентификаторами.
+- Цели размечены в `assets/site.js`: `phone`, `email`, `lead`, `visit` — события `ym('reachGoal')`
+  под защитой `window.__ymId`. В счётчике они уже созданы (см. ниже), руками в кабинете ничего
+  создавать не нужно.
 - **Google Search Console** подключён через сервисный аккаунт
   `console@zinc-authority-331923.iam.gserviceaccount.com` (ключ
   `E:\Оптимизация\геосинтетика.москва\zinc-authority-331923-5b10ba931090.json`), инструмент —
   `tools/gsc.py --status | --verify | --submit | --report`. Свойство `https://rex.moscow/`
   в статусе `siteOwner`, sitemap принят (0 ошибок).
-- **Яндекс.Вебмастер** — подтверждение мета-тегом, действие в кабинете («Проверить»);
-  после подтверждения: отправить sitemap, указать регион «Москва», привязать счётчик Метрики.
+- **Яндекс.Вебмастер** — права на `https:rex.moscow:443` уже подтверждены мета-тегом
+  (`VERIFIED`, `META_TAG`, uin `f3b337fd5c2214de`, проверено 24.08.2026 ещё на старом сайте) —
+  кнопку «Проверить» нажимать не нужно. Инструмент — `tools/yawm.py`:
+
+  ```
+  python tools\yawm.py                 # сводка: права, ИКС, страницы в поиске, sitemap, квота
+  python tools\yawm.py --sitemaps      # что Вебмастер знает о sitemap
+  python tools\yawm.py --add-sitemap URL / --del-sitemap ID
+  python tools\yawm.py --diag          # 32 проверки, печатает только сработавшие
+  python tools\yawm.py --queries 20    # популярные запросы за 30 дней
+  python tools\yawm.py --recrawl URL   # переобход (квота 150 URL/сутки)
+  ```
+
+  Состояние на 16.11.2026: ИКС 10, в поиске 275 страниц (данные Яндекса от 07.10.2026, до
+  миграции), исключена 1, квота переобхода 150/сутки. В Вебмастере числится только старый
+  `sitemap_index.xml` (6 URL, обнаружен из robots.txt, сейчас отдаёт 404) — наш `sitemap.xml`
+  добавлен не был: **все POST-методы Вебмастера отдают 504 на стороне Яндекса** (проверено и на
+  несуществующем хосте), это не наша ошибка, повторить позже.
+  Диагностика показывает 4 сработавшие проверки: `DOCUMENTS_MISSING_DESCRIPTION` (30.09.2026),
+  `NO_METRIKA_COUNTER_BINDING` (16.11.2026), `NO_REGIONS`, `NOT_IN_SPRAV`. Первые две
+  и регион правятся только в кабинете: «Настройки → Метрика» (привязать 90016027),
+  «Регион» → Москва, «Справочник» — по желанию.
+- **Цели Метрики** созданы через API (не руками): `phone`, `email`, `lead`, `visit` — тип
+  «JavaScript-событие» (в API это `type: action` + `conditions[exact].url`), id 681977045…48,
+  `python tools\ya_api.py --goals` / `--goals-init`. В счётчике также включены автоцели
+  («отправка формы», «клик по телефону», «клик по email» и др.) — они работают параллельно.
 - **API Метрики и Вебмастера** — приложение Яндекс OAuth `2461a870ef624eb882a48750b44de5a0`
   (тип «Для доступа к API», redirect_uri зашит на `https://oauth.yandex.ru/verification_code`).
   Client ID / Secret — в `deploy/yandex-oauth.env` (в git **не** попадает, как `server.env`),
