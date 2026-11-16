@@ -59,6 +59,16 @@ def copy_assets():
     make_touch(os.path.join(dst, "apple-touch.png"))
 
 
+def copy_root_files():
+    """Файлы подтверждения прав (Google/Yandex) кладём в корень сборки как есть."""
+    for fn in os.listdir(C.BASE):
+        if not fn.endswith(".html"):
+            continue
+        if not (fn.startswith("google") or fn.startswith("yandex_")):
+            continue
+        shutil.copy2(os.path.join(C.BASE, fn), os.path.join(C.DIST, fn))
+
+
 def make_og(path):
     try:
         from PIL import Image, ImageDraw, ImageFont
@@ -154,6 +164,7 @@ def main():
         shutil.rmtree(C.DIST)
     os.makedirs(C.DIST)
     copy_assets()
+    copy_root_files()
     m = model()
     urls = []
     dates = {}
