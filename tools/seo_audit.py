@@ -69,12 +69,17 @@ def main():
             fp = os.path.join(root, f)
             url = norm_url(fp)
             raw = io.open(fp, encoding="utf-8").read()
+            # файлы подтверждения прав (google<hex>.html) — не страницы сайта, пропускаем
+            if not raw.lstrip().lower().startswith(("<!doctype", "<html")):
+                continue
             try:
                 doc = LH.fromstring(raw)
             except Exception as e:
                 print("! parse", url, e)
                 continue
             head = doc.head
+            if head is None:
+                continue
             get = lambda xp: head.xpath(xp)
             title = text_of(get("//title")[0]) if get("//title") else ""
             md = get('//meta[@name="description"]/@content')
@@ -92,7 +97,7 @@ def main():
             imgs = doc.xpath("//img")
             for im in imgs:
                 src = im.get("src") or ""
-                if not (im.get("alt") or "").strip():
+                if im.get("alt") is None:      # пустой alt="" — норма для декоративных картинок
                     images_noalt.append((url, src))
                 if not (im.get("width") and im.get("height")):
                     images_no_size.append((url, src))
@@ -145,10 +150,12 @@ def main():
     short_descs = [(u, p["desc_len"]) for u, p in pages.items() if 0 < p["desc_len"] < 70]
     no_desc = [u for u, p in pages.items() if not p["desc"]]
     bad_h1 = [(u, p["h1n"]) for u, p in pages.items() if p["h1n"] != 1]
+    # /404 — служебная страница без canonical и без разметки (noindex, отдаётся только из nginx)
     bad_canon = [(u, p["canonical"]) for u, p in pages.items()
-                 if p["canonical"].rstrip("/") != ("https://rex.moscow" + u).rstrip("/")]
+                 if u != "/404"
+                 and p["canonical"].rstrip("/") != ("https://rex.moscow" + u).rstrip("/")]
     no_og = [u for u, p in pages.items() if not p["og_ok"]]
-    no_ld = [u for u, p in pages.items() if p["jsonld"] == 0]
+    no_ld = [u for u, p in pages.items() if p["jsonld"] == 0 and u != "/404"]
 
     # ---- sitemap
     sm = io.open(os.path.join(DIST, "sitemap.xml"), encoding="utf-8").read()

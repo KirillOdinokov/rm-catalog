@@ -214,7 +214,7 @@ k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNo
 (window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
 ym(%d,"init",{webvisor:%s,clickmap:true,referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/%d" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<noscript><div><img src="https://mc.yandex.ru/watch/%d" width="1" height="1" style="position:absolute;left:-9999px" alt=""></div></noscript>
 <!-- /Yandex.Metrika counter -->
 """ % (mid, mid, wv, mid)
 
