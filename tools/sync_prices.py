@@ -18,6 +18,7 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL = os.path.join(BASE, "data", "model.json")
 BACKUP = os.path.join(BASE, "data", "model.backup.json")
 REPORT = os.path.join(BASE, "data", "price_sync.json")
+PENDING = os.path.join(BASE, "data", "price_pending.json")
 
 API_URL = os.environ.get(
     "REX_API_URL",
@@ -107,6 +108,10 @@ def main():
         with open(MODEL, encoding="utf-8") as f:
             open(BACKUP, "w", encoding="utf-8").write(f.read())
     json.dump(model, open(MODEL, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    json.dump(
+        {"prices": {p["slug"]: (p.get("price") or 0) for p in model["products"]}},
+        open(PENDING, "w", encoding="utf-8"), ensure_ascii=False, indent=0,
+    )
 
     json.dump({
         "updated": date.today().isoformat(),

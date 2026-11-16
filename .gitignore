@@ -12,6 +12,8 @@ data/prices.json
 data/prices_prev_snapshot.json
 data/price_sync.json
 data/price_map_auto.json
+data/price_pending.json
+data/price_deployed.json
 mapping.md
 
 # Неопубликованный контент

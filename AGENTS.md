@@ -235,11 +235,14 @@ $py13 = 'C:\Users\Кирилл\AppData\Local\Programs\Python\Python313\python.ex
 ### Автосинк `sync_and_deploy.sh` (на flux, по cron)
 
 `cd /home/kirill/rex.moscow` → `git checkout -- data/model.json` → `git pull --ff-only` →
-`sync_prices.py` → `check_publish_due.py` → если цены изменились **или** наступила дата
-отложенной публикации: `site/build.py` + `sh deploy/deploy_linux.sh`. Лог — `/tmp/rex_sync.log`.
+`sync_prices.py` → `check_publish_due.py` → если цены изменились, отличаются от последнего
+успешного деплоя (`tools/prices_dirty.py` по `data/price_pending.json` и
+`data/price_deployed.json`) **или** наступила дата отложенной публикации:
+`site/build.py` + `sh deploy/deploy_linux.sh`. После успешной выкладки снапшот цен
+копируется в `data/price_deployed.json`. Лог — `/tmp/rex_sync.log`.
 На сервере `REX_API_URL=http://127.0.0.1:8001/api/site/6/prices` (через nginx Базы).
 
-**Важно:** скрипт пересобирает сайт только по этим двум триггерам. Правки кода и контента
+**Важно:** скрипт пересобирает сайт только по этим триггерам. Правки кода и контента
 (тексты, статьи, дизайн) сами не выкатываются — после `git push` нужно на `flux` запустить
 `sh sync_and_deploy.sh` вручную (или `python site/build.py && sh deploy/deploy_linux.sh`).
 Пока этого не сделано, следующее изменение цен выкатит накопленные правки разом.
