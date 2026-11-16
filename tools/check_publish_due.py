@@ -35,6 +35,9 @@ for p in m.get("posts", []):
         pa = "%s-%s-%s" % (m2.group(3), m2.group(2), m2.group(1))
     if pa <= today:
         if not os.path.exists(os.path.join(DIST, p["slug"] + ".html")):
-            due.append(p["slug"])
+            due.append({"slug": p["slug"], "title": p.get("title") or p["slug"]})
 
-print(len(due))
+if "--json" in sys.argv:
+    print(json.dumps(due, ensure_ascii=False))
+else:
+    print(len(due))
