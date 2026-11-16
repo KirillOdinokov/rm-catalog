@@ -36,11 +36,11 @@ MIN_ORDER = 10000
 
 # --- веб-аналитика и подтверждение прав в поисковиках (заполняет заказчик)
 # номер счётчика Яндекс.Метрики; 0 — счётчик на сайте не выводится
-METRIKA_ID = 0
+METRIKA_ID = 90016027
 METRIKA_WEBVISOR = True
 # содержимое meta-тегов подтверждения (строка из кабинета, без самого тега)
-VERIFY_YANDEX = ""
-VERIFY_GOOGLE = ""
+VERIFY_YANDEX = "f3b337fd5c2214de"
+VERIFY_GOOGLE = "xjv5XwrjPxOgn8HyGxW-qbOBT7HmHHas2TelLaRikHw"
 
 # выезд специалиста на объект (бесплатно по Москве и Подмосковью)
 VISIT_TITLE = "Вызвать специалиста на объект"
