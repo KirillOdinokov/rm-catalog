@@ -22,13 +22,16 @@ def head(title, desc, path, noindex=False, extra="", ld="", og_image=None, canon
     robots = '<meta name="robots" content="noindex,follow">' if noindex else '<meta name="robots" content="index,follow">'
     can_tag = ('<link rel="canonical" href="%s">' % cur) if canonical else ""
     img = og_image or (C.SITE + "/assets/og.jpg")
+    # размеры указываем только для дефолтной картинки og.jpg (1200×630);
+    # у обложек статей и фото товаров размеры свои, поэтому теги не выводим — иначе
+    # соцсети и мессенджеры получают заведомо неверные 1200×630
+    dims = "" if og_image else ('<meta property="og:image:width" content="1200">\n'
+                                '<meta property="og:image:height" content="630">\n')
     social = """<meta property="og:image" content="%s">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
+%s<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="%s">
 <meta name="twitter:description" content="%s">
-<meta name="twitter:image" content="%s">""" % (esc(img), esc(title), esc(desc), esc(img))
+<meta name="twitter:image" content="%s">""" % (esc(img), dims, esc(title), esc(desc), esc(img))
     verify = ""
     if C.VERIFY_YANDEX:
         verify += '<meta name="yandex-verification" content="%s">\n' % esc(C.VERIFY_YANDEX)

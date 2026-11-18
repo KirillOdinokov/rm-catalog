@@ -51,3 +51,6 @@ STATUS.md
 
 # Исходный пакет статей (200 html + metadata.csv): тексты уже разобраны в content/articles/
 articles-future/
+
+# Исходный архив картинок от клиента: в сборку попадают только WebP из assets/img/a
+images/
